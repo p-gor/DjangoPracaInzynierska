@@ -1,0 +1,31 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block content %}
+    <link rel="stylesheet" type="text/css" href="{% static 'Css/profile.css' %}">
+    <div class="content">
+        <div class="content_profile">
+            <div class="image_container">
+                <img src="{{ user.profile.image.url }}">
+            </div>
+            <h1>Witaj, {{ user.first_name }} {{ user.last_name }}</h1>
+            <p>{{ user.email }}</p>
+        </div>
+        <div class="content_update">
+            <h1>Profile</h1>
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="form_div">
+                    <table>
+                        {{ user_form.as_table }}
+                        {{ profile_form.as_table}}
+                    </table>
+                </div>
+                <br>
+                <div>
+                    <button class="update_button" type="submit">Update</button>
+                </div>
+                <br>
+            </form>
+        </div>
+    </div>
+{% endblock content %}

@@ -1,0 +1,15 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block content %}
+    <link rel="stylesheet" type="text/css" href="{% static 'Css/home.css' %}">
+    <div class="opis">
+        <div class="app-text">
+            <h1>ASVS Tool</h1>
+            <p>Aplikacja powstała w celu wspomagania<br>
+            pentesterów wykonujących testy penetracyjne<br>
+            zgodnie ze standardem OWASP ASVS 4.0.2. Z wykorzystaniem<br>
+            zestawu kryteriów, generowana jest lista kontrolna wymagań,<br>
+                które należy przprowadzić.</p>
+        </div>
+    </div>
+{% endblock content %}

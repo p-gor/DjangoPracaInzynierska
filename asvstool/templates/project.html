@@ -1,0 +1,43 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block content %}
+    <link rel="stylesheet" type="text/css" href="{% static 'Css/project.css' %}">
+    <div class="app-text">
+        <h1>My Projects</h1>
+    </div>
+    {% if Obiekty %}
+    <div class="scroll">
+        <table class="cal">
+            {% for project in Obiekty %}
+                <tr>
+                    <td class="td_project">
+                        <a class="link" href="{% url 'tool-details' project.id %}">{{ project.project_name }}</a><br>
+                    </td>
+                    {% if user.type_account == 0 %}
+                        <td class="td_delete">
+                            <form method="POST">
+                                {% csrf_token %}
+                                <input type="hidden" value="{{ project.id }}" name="id">
+                                <button class="button" type="submit">Usuń projekt</button>
+                            </form>
+                        </td>
+                    {% endif %}
+                    <td class="td_generuj">
+                        <button class="button" type="submit">Generuj</button>
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+    {% else %}
+        {% if user.type_account == 1 %}
+            <div class="napis">
+                <p>Brak przypisanych projektów!</p>
+            </div>
+        {% else %}
+            <div class="napis">
+                <p>Brak utworzonych projektów!</p>
+            </div>
+        {% endif %}
+    {% endif %}
+{% endblock content %}

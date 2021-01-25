@@ -1,0 +1,36 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="{% static 'Css/main.css' %}">
+
+    {% if title %}
+        <title>ASVSTool - {{ title }}</title>
+    {% else %}
+        <title>ASVSTool</title>
+    {% endif %}
+</head>
+<body>
+    <div class="container">
+        <div class="menu">
+            <ul>
+                <li><a class="nav" href="{% url 'tool-home' %}">Home</a></li>
+                <li><a class="nav" href="{% url 'tool-project' %}">My Projects</a></li>
+                {% if user.type_account == 0 %}
+                    <li><a class="nav" href="{% url 'tool-add_project' %}">New Project</a></li>
+                {% endif %}
+                <li><a class="nav" href="{% url 'tool-about' %}">About standard OWASP ASVS</a></li>
+                {% if user.is_authenticated %}
+                    <li><a class="log" href="{% url 'logout' %}">Logout</a></li>
+                    <li><a class="reg" href="{% url 'tool-profile' %}">Profile</a></li>
+                {% else %}
+                    <li><a class="log" href="{% url 'login' %}">Login</a></li>
+                    <li><a class="reg" href="{% url 'register' %}">Register</a></li>
+                {% endif %}
+            </ul>
+        </div>
+        {% block content %}{% endblock %}
+    </div>
+</body>
+</html>

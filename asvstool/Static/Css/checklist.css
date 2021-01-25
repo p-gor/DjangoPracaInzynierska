@@ -1,0 +1,55 @@
+    .scroll {
+        overflow: hidden;
+        overflow-y:scroll;
+        height: auto;
+        max-height: 10vh;
+    }
+
+    .cal
+    {
+        border-collapse: separate;
+        width:100%;
+        border-spacing:3px;
+    }
+    .ops
+    {
+        text-align: center;
+        height: 5vh;
+        color: #b2b1b1;
+        background-color: #42455a;
+        font-size: 20px;
+    }
+
+    .ops_req
+    {
+        text-align: center;
+        color: #b2b1b1;
+        background-color: #42455a;
+    }
+
+    .req{
+        padding-left: 2vh;
+        text-decoration: none;
+        color: white;
+    }
+
+    .th_req{
+        border: solid #b2b1b1;
+        background-color: #8288AE;
+    }
+
+    .td_req{
+        background-color: #8288AE;
+        color: white;
+    }
+
+    .napis{
+        font-size: 30px;
+        margin: 3vh auto 0 auto;
+        text-align: center;
+        background: #42455a;
+        color: #b2b1b1;
+        border-radius: 60px;
+        border: solid white;
+        width: 80vh;
+    }

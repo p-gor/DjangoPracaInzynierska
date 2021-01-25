@@ -1,0 +1,55 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block content %}
+    <link rel="stylesheet" type="text/css" href="{% static 'Css/requirement.css' %}">
+    <div class="about_box">
+        <div class="app-text">
+            <h1>About standard OWASP ASVS</h1>
+            <br>
+            <table class="test">
+                <thead>
+                    <tr>
+                        <th class="ops_req" style="text-align: center;">{{ Name }}</th>
+                        <th class="ops_req">L1</th>
+                        <th class="ops_req">L2</th>
+                        <th class="ops_req">L3</th>
+                        <th class="ops_req">CWE</th>
+                        <th class="ops_req">NIST</th>
+                    </tr>
+                </thead>
+                {% for tests in Obiekty %}
+                    <tr>
+                        <td class="td_req">
+                            <a class="req">{{ tests.requirement_name }}</a><br>
+                        </td>
+                        <td class="td_req" style="text-align: center;">
+                            {% if tests.lvl1 == 1 %}
+                                &#x2713;
+                            {% endif %}
+                        </td>
+                        <td class="td_req" style="text-align: center;">
+                            {% if tests.lvl2 == 1 %}
+                                &#x2713;
+                            {% endif %}
+                        </td>
+                        <td class="td_req" style="text-align: center;">
+                            {% if tests.lvl3 == 1 %}
+                                &#x2713;
+                            {% endif %}
+                        </td>
+                        <td class="td_req" style="text-align: center;">
+                            {% if tests.cwe != None %}
+                                {{ tests.cwe }}
+                            {% endif %}
+                        </td>
+                        <td class="td_req" style="text-align: center;">
+                            {% if tests.nist != None %}
+                                {{ tests.nist }}
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+{% endblock content %}

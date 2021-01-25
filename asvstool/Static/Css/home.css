@@ -1,0 +1,21 @@
+    .opis{
+        width: 90%;
+        height: 80%;
+        margin: 5vh 0 0 5vh;
+    }
+
+    .app-text{
+        width: 100%;
+        float: left;
+    }
+
+    .app-text h1{
+        font-size: 50px;
+        position: relative;
+        color: white;
+    }
+
+    .app-text p{
+        color: #cbd5db;
+        font-size: 25px;
+    }

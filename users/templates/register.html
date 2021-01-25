@@ -1,0 +1,24 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block content %}
+    <link rel="stylesheet" type="text/css" href="{% static 'Css/register.css' %}">
+    <div class="content_register">
+        <h1>Join to ASVS Tool</h1>
+        <form method="POST">
+            {% csrf_token %}
+            <div class="form_div">
+                <table>
+                    {{ form.as_table }}
+                </table>
+            </div>
+            <br>
+            <div>
+                <button class="sign_button" type="submit">Sign Up</button>
+            </div>
+            <br>
+        </form>
+        <div>
+            Already have an account? <a class="sign_l" href="{% url 'login' %}">Sign In</a>
+        </div>
+    </div>
+{% endblock content %}

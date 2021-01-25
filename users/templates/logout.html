@@ -1,0 +1,11 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block content %}
+    <link rel="stylesheet" type="text/css" href="{% static 'Css/register.css' %}">
+    <div class="content_register">
+        <h1>You have been logged out</h1>
+        <div>
+            <a class="sign_l" href="{% url 'login' %}">Log In Again</a>
+        </div>
+    </div>
+{% endblock content %}

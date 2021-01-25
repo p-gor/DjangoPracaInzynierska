@@ -1,0 +1,25 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block content %}
+    <link rel="stylesheet" type="text/css" href="{% static 'Css/requirement.css' %}">
+    <div class="about_box">
+        <div class="app-text">
+            <h1>About standard OWASP ASVS</h1>
+            <br>
+            <table class="cal">
+                <thead>
+                    <tr>
+                        <h3 class="ops">Chapters</h3>
+                    </tr>
+                </thead>
+                {% for chapter in Obiekty %}
+                    <tr>
+                        <td class="td_about">
+                            <a class="link" href="{% url 'tool-subsection' chapter.id %}">{{ chapter.chapter_title }}</a><br>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+{% endblock content %}
