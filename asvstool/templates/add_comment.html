@@ -1,0 +1,30 @@
+{% extends 'details_project.html' %}
+{% load static %}
+{% block content_project %}
+    <link rel="stylesheet" type="text/css" href="{% static 'Css/add_comment.css' %}">
+    {% if info %}:
+        <div class="napis">
+            <p>Nie masz dostępu do utworzonego projektu!</p>
+        </div>
+    {% else %}:
+        {% if Req.comment %}:
+            <div class="napis">
+                {{ Req.comment }}
+            </div>
+        {% else %}:
+            <div class="napis">
+                <p> Jesteś pewien, że chcesz odrzucić wybrane wymaganie?</p>
+                <p style="color: gold">{{ Req.requirement.requirement_name }}</p>
+            </div>
+            <div class="content_new_comment">
+                <form method="POST">
+                    <table>
+                        {%  csrf_token %}
+                        {{ form.as_table }}
+                    </table>
+                    <button class="add_comment_button" type="submit">Dodaj komentarz</button>
+                </form>
+            </div>
+        {% endif %}
+    {% endif %}
+{% endblock content_project %}

@@ -7,88 +7,28 @@
             <p>Nie masz dostępu do utworzonego projektu!</p>
         </div>
     {% else %}:
-        <table class="cal">
+        <div class="scroll">
+            <table class="cal">
             <thead>
-            <tr class="ops">
-                <th>{{ chapter }}</th>
-                <th>L1</th>
-                <th>L2</th>
-                <th>L3</th>
-                <th>CWE</th>
-                <th>NIST</th>
-                <th>Result</th>
-                <th>Pass</th>
-                <th>Fail</th>
+            <tr>
+                <th class="title">{{ chapter }}</th>
             </tr>
             </thead>
             {% for reqs in Obiekty %}
                 {% if reqs.requirement.subsection_nr.chapter_nr.chapter_title == chapter %}
                     <tr>
                         <td class="td_req">
-                            <a class="req">{{ reqs.requirement.requirement_name }}</a>
+                            <a class="link_req">{{ reqs.requirement.requirement_name }}</a>
                         </td>
-                        <td class="td_req">
-                            {% if reqs.requirement.lvl1 == 1 %}
-                                &#x2713;
-                            {% endif %}
-                        </td>
-                        <td class="td_req" style="text-align: center;">
-                            {% if reqs.requirement.lvl2 == 1 %}
-                                &#x2713;
-                            {% endif %}
-                        </td>
-                        <td class="td_req" style="text-align: center;">
-                            {% if reqs.requirement.lvl3 == 1 %}
-                                &#x2713;
-                            {% endif %}
-                        </td>
-                        <td class="td_req" style="text-align: center;">
-                            {% if reqs.requirement.cwe != None %}
-                                {{ reqs.requirement.cwe }}
-                            {% endif %}
-                        </td>
-                        <td class="td_req" style="text-align: center;">
-                            {% if reqs.requirement.nist != None %}
-                                {{ reqs.requirement.nist }}
-                            {% endif %}
-                        </td>
-                        <td class="td_req" style="text-align: center;">
-                            {% if reqs.result == 0 %}
-                                Not tested
-                            {% elif reqs.result == 1 %}
-                                Fail
-                            {% else %}
-                                Pass
-                            {% endif %}
-                        </td>
-                        <td class="td_req" style="text-align: center;">
-                            {% if reqs.result == 0 %}
-                                <form method="POST">
-                                    {%  csrf_token %}
-                                    <input type="hidden" value="{{ reqs.id }}" name="id">
-                                    <button type="submit">Pass</button>
-                            {% elif reqs.result == 1 %}
-                                Yes
-                            {% else %}
-                                No
-                            {% endif %}
-                        </td>
-                        <td class="td_req" style="text-align: center;">
-                            {% if reqs.result == 0 %}
-                                <form method="POST">
-                                    {%  csrf_token %}
-                                    <input type="hidden" value="{{ reqs.id }}" name="id">
-                                    <button type="submit">Fail</button>
-                            {% elif reqs.result == 1 %}
-                                No
-                            {% else %}
-                                Yes
-                            {% endif %}
-                            </form>
+                        <td class="td_reject">
+                            <button class="button">
+                                <a class="link_reject" href="{% url 'tool-add-comment-reject' project.id reqs.id %}">Odrzuć</a>
+                            </button>
                         </td>
                     </tr>
                 {% endif %}
             {% endfor %}
         </table>
+        </div>
     {% endif %}
 {% endblock content_project %}

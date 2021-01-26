@@ -108,3 +108,15 @@ class AddProject(forms.ModelForm):
                   'Okresl_wykorzystywane_uslugi_sieciowe')
 
         exclude = ('klient', 'requirements')
+
+
+class AddComment(forms.ModelForm):
+    comment = forms.CharField(max_length=256, required=False,
+                              widget=forms.TextInput(attrs={'class': 'special', 'title': 'Comment'}))
+
+    class Meta:
+        model = ReqsProject
+
+        fields = ('comment',)
+
+        exclude = ('project', 'requirement', 'status')

@@ -1,8 +1,10 @@
     .scroll {
+        width: 95%;
         overflow: hidden;
         overflow-y:scroll;
         height: auto;
-        max-height: 10vh;
+        max-height: 50vh;
+        margin: 0 auto 0 auto;
     }
 
     .cal
@@ -11,36 +13,52 @@
         width:100%;
         border-spacing:3px;
     }
-    .ops
+
+    .title
     {
         text-align: center;
         height: 5vh;
         color: #b2b1b1;
         background-color: #42455a;
         font-size: 20px;
-    }
-
-    .ops_req
-    {
-        text-align: center;
-        color: #b2b1b1;
-        background-color: #42455a;
-    }
-
-    .req{
-        padding-left: 2vh;
-        text-decoration: none;
-        color: white;
-    }
-
-    .th_req{
-        border: solid #b2b1b1;
-        background-color: #8288AE;
+        border: solid white;
+        border-radius: 60px;
     }
 
     .td_req{
         background-color: #8288AE;
+        border: solid white;
         color: white;
+        text-align: center;
+        border-radius: 60px;
+        font-size: 15px;
+    }
+
+    .td_reject{
+        width: 4%;
+        text-align: center;
+    }
+
+    .button{
+        padding: 10px;
+        border-radius: 20px;
+        border: solid white;
+        margin: 1% 0;
+        outline: none;
+        cursor: pointer;
+        background-color: #42455a;
+    }
+
+    .link_reject{
+        text-decoration: none;
+        color: #b2b1b1;
+        font-size: 15px;
+    }
+
+    .link_req{
+        text-decoration: none;
+        color: white;
+        font-size: 15px;
     }
 
     .napis{

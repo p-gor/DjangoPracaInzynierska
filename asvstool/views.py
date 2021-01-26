@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from .models import Chapter, Subsection, Requirement, Project, ReqsProject
 from users.models import Account
-from .forms import AddProject
+from .forms import AddProject, AddComment
 from django.contrib.auth.decorators import login_required
 
 
@@ -119,6 +119,39 @@ def rejected(request, id):
             'title': 'Rejected Requirements'
         }
         return render(request, 'rejected.html', context)
+
+
+@login_required
+def add_comment_reject(request, id_project, id_requirement):
+    email = Account.objects.get(username=request.user.username)
+    if (Project.objects.get(id=id_project).klient == email) or (Project.objects.get(id=id_project).Pentester == email):
+        if request.method == 'POST':
+            form_tmp = ReqsProject.objects.get(id=id_requirement)
+            form_tmp.comment = request.POST['comment']
+            form_tmp.save()
+            context = {
+                'Name': Project.objects.get(id=id_project).project_name,
+                'project': Project.objects.get(id=id_project),
+                'Req': ReqsProject.objects.get(id=id_requirement),
+                'title': 'Reject',
+            }
+            return render(request, 'add_comment.html', context)
+        else:
+            form = AddComment()
+            context = {
+                'Name': Project.objects.get(id=id_project).project_name,
+                'project': Project.objects.get(id=id_project),
+                'Req': ReqsProject.objects.get(id=id_requirement),
+                'title': 'Reject',
+                'form': form
+            }
+            return render(request, 'add_comment.html', context)
+    else:
+        context = {
+            'info': 'Nie masz dostępu do tego projektu',
+            'title': 'Reject'
+        }
+        return render(request, 'add_comment.html', context)
 
 
 @login_required

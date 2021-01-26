@@ -11,14 +11,14 @@
                 Prosze podac inną nazwę projektu</p>
         </div>
         <div class="content_new_project">
-        <form method="POST">
-            <table>
-                {%  csrf_token %}
-                {{ form.as_table }}
-            </table>
-            <button class="add_button" type="submit">Dodaj projekt</button>
-        </form>
-    </div>
+            <form method="POST">
+                <table>
+                    {%  csrf_token %}
+                    {{ form.as_table }}
+                </table>
+                <button class="add_button" type="submit">Dodaj projekt</button>
+            </form>
+        </div>
     {% else %}:
         <div class="content_new_project">
             <form method="POST">
