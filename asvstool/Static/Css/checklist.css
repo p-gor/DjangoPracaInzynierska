@@ -34,6 +34,11 @@
         font-size: 15px;
     }
 
+    .td_add_comment{
+        width: 8%;
+        text-align: center;
+    }
+
     .td_reject{
         width: 4%;
         text-align: center;

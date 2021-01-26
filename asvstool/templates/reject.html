@@ -1,7 +1,7 @@
 {% extends 'details_project.html' %}
 {% load static %}
 {% block content_project %}
-    <link rel="stylesheet" type="text/css" href="{% static 'Css/add_comment.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'Css/reject.css' %}">
     {% if info %}:
         <div class="napis">
             <p>Nie masz dostępu do utworzonego projektu!</p>
@@ -13,17 +13,11 @@
             </div>
         {% else %}:
             <div class="napis">
-                <p> Dodaj komentarz do wymagania</p>
+                <p> Czy na pewno chcesz odrzucić wymaganie?</p>
                 <p style="color: gold">{{ Req.requirement.requirement_name }}</p>
             </div>
             <div class="content_new_comment">
-                <form method="POST">
-                    <table>
-                        {%  csrf_token %}
-                        {{ form.as_table }}
-                    </table>
-                    <button class="add_comment_button" type="submit">Dodaj komentarz</button>
-                </form>
+
             </div>
         {% endif %}
     {% endif %}

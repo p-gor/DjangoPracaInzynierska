@@ -122,7 +122,7 @@ def rejected(request, id):
 
 
 @login_required
-def add_comment_reject(request, id_project, id_requirement):
+def add_comment(request, id_project, id_requirement):
     email = Account.objects.get(username=request.user.username)
     if (Project.objects.get(id=id_project).klient == email) or (Project.objects.get(id=id_project).Pentester == email):
         if request.method == 'POST':
@@ -133,7 +133,7 @@ def add_comment_reject(request, id_project, id_requirement):
                 'Name': Project.objects.get(id=id_project).project_name,
                 'project': Project.objects.get(id=id_project),
                 'Req': ReqsProject.objects.get(id=id_requirement),
-                'title': 'Reject',
+                'title': 'Add Comment',
             }
             return render(request, 'add_comment.html', context)
         else:
@@ -142,16 +142,46 @@ def add_comment_reject(request, id_project, id_requirement):
                 'Name': Project.objects.get(id=id_project).project_name,
                 'project': Project.objects.get(id=id_project),
                 'Req': ReqsProject.objects.get(id=id_requirement),
-                'title': 'Reject',
+                'title': 'Add Comment',
                 'form': form
             }
             return render(request, 'add_comment.html', context)
     else:
         context = {
             'info': 'Nie masz dostępu do tego projektu',
-            'title': 'Reject'
+            'title': 'Add Comment'
         }
         return render(request, 'add_comment.html', context)
+
+
+def reject(request, id_project, id_requirement):
+    email = Account.objects.get(username=request.user.username)
+    if (Project.objects.get(id=id_project).klient == email) or (Project.objects.get(id=id_project).Pentester == email):
+        if request.method == 'POST':
+            form_tmp = ReqsProject.objects.get(id=id_requirement)
+            form_tmp.status = 0
+            form_tmp.save()
+            context = {
+                'Name': Project.objects.get(id=id_project).project_name,
+                'project': Project.objects.get(id=id_project),
+                'Req': ReqsProject.objects.get(id=id_requirement),
+                'title': 'Reject',
+            }
+            return render(request, 'reject.html', context)
+        else:
+            context = {
+                'Name': Project.objects.get(id=id_project).project_name,
+                'project': Project.objects.get(id=id_project),
+                'Req': ReqsProject.objects.get(id=id_requirement),
+                'title': 'Reject',
+            }
+            return render(request, 'reject.html', context)
+    else:
+        context = {
+            'info': 'Nie masz dostępu do tego projektu',
+            'title': 'Reject'
+        }
+        return render(request, 'reject.html', context)
 
 
 @login_required

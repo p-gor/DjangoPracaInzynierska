@@ -20,9 +20,14 @@
                         <td class="td_req">
                             <a class="link_req">{{ reqs.requirement.requirement_name }}</a>
                         </td>
+                        <td class="td_add_comment">
+                            <button class="button">
+                                <a class="link_reject" href="{% url 'tool-add-comment' project.id reqs.id %}">Dodaj komentarz</a>
+                            </button>
+                        </td>
                         <td class="td_reject">
                             <button class="button">
-                                <a class="link_reject" href="{% url 'tool-add-comment-reject' project.id reqs.id %}">Odrzuć</a>
+                                <a class="link_reject" href="{% url 'tool-reject' project.id reqs.id %}">Odrzuć</a>
                             </button>
                         </td>
                     </tr>
