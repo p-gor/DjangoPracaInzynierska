@@ -122,18 +122,22 @@ def rejected(request, id):
 
 
 @login_required
-def add_comment(request, id_project, id_requirement):
+def add_comment(request, id_project, id_requirement, pk):
     email = Account.objects.get(username=request.user.username)
     if (Project.objects.get(id=id_project).klient == email) or (Project.objects.get(id=id_project).Pentester == email):
         if request.method == 'POST':
             form_tmp = ReqsProject.objects.get(id=id_requirement)
             form_tmp.comment = request.POST['comment']
             form_tmp.save()
+            form = AddComment()
             context = {
                 'Name': Project.objects.get(id=id_project).project_name,
                 'project': Project.objects.get(id=id_project),
                 'Req': ReqsProject.objects.get(id=id_requirement),
                 'title': 'Add Comment',
+                'chapter': ReqsProject.objects.get(id=id_requirement).requirement.subsection_nr.chapter_nr,
+                'if_checklist': pk,
+                'form': form,
             }
             return render(request, 'add_comment.html', context)
         else:
@@ -142,8 +146,10 @@ def add_comment(request, id_project, id_requirement):
                 'Name': Project.objects.get(id=id_project).project_name,
                 'project': Project.objects.get(id=id_project),
                 'Req': ReqsProject.objects.get(id=id_requirement),
+                'chapter': ReqsProject.objects.get(id=id_requirement).requirement.subsection_nr.chapter_nr,
                 'title': 'Add Comment',
-                'form': form
+                'if_checklist': pk,
+                'form': form,
             }
             return render(request, 'add_comment.html', context)
     else:
@@ -154,8 +160,16 @@ def add_comment(request, id_project, id_requirement):
         return render(request, 'add_comment.html', context)
 
 
+@login_required
 def reject(request, id_project, id_requirement):
     email = Account.objects.get(username=request.user.username)
+    context = {
+        'Name': Project.objects.get(id=id_project).project_name,
+        'project': Project.objects.get(id=id_project),
+        'Req': ReqsProject.objects.get(id=id_requirement),
+        'title': 'Reject',
+        'chapter': ReqsProject.objects.get(id=id_requirement).requirement.subsection_nr.chapter_nr,
+    }
     if (Project.objects.get(id=id_project).klient == email) or (Project.objects.get(id=id_project).Pentester == email):
         if request.method == 'POST':
             form_tmp = ReqsProject.objects.get(id=id_requirement)
@@ -166,15 +180,11 @@ def reject(request, id_project, id_requirement):
                 'project': Project.objects.get(id=id_project),
                 'Req': ReqsProject.objects.get(id=id_requirement),
                 'title': 'Reject',
+                'chapter': ReqsProject.objects.get(id=id_requirement).requirement.subsection_nr.chapter_nr,
+                'if_post': 0,
             }
             return render(request, 'reject.html', context)
         else:
-            context = {
-                'Name': Project.objects.get(id=id_project).project_name,
-                'project': Project.objects.get(id=id_project),
-                'Req': ReqsProject.objects.get(id=id_requirement),
-                'title': 'Reject',
-            }
             return render(request, 'reject.html', context)
     else:
         context = {
@@ -182,6 +192,40 @@ def reject(request, id_project, id_requirement):
             'title': 'Reject'
         }
         return render(request, 'reject.html', context)
+
+
+@login_required
+def restore(request, id_project, id_requirement):
+    email = Account.objects.get(username=request.user.username)
+    context = {
+        'Name': Project.objects.get(id=id_project).project_name,
+        'project': Project.objects.get(id=id_project),
+        'Req': ReqsProject.objects.get(id=id_requirement),
+        'title': 'Reject',
+        'chapter': ReqsProject.objects.get(id=id_requirement).requirement.subsection_nr.chapter_nr,
+    }
+    if (Project.objects.get(id=id_project).klient == email) or (Project.objects.get(id=id_project).Pentester == email):
+        if request.method == 'POST':
+            form_tmp = ReqsProject.objects.get(id=id_requirement)
+            form_tmp.status = 1
+            form_tmp.save()
+            context = {
+                'Name': Project.objects.get(id=id_project).project_name,
+                'project': Project.objects.get(id=id_project),
+                'Req': ReqsProject.objects.get(id=id_requirement),
+                'title': 'Reject',
+                'chapter': ReqsProject.objects.get(id=id_requirement).requirement.subsection_nr.chapter_nr,
+                'if_post': 0,
+            }
+            return render(request, 'restore.html', context)
+        else:
+            return render(request, 'restore.html', context)
+    else:
+        context = {
+            'info': 'Nie masz dostępu do tego projektu',
+            'title': 'Reject'
+        }
+        return render(request, 'restore.html', context)
 
 
 @login_required

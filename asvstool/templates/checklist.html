@@ -22,13 +22,17 @@
                         </td>
                         <td class="td_add_comment">
                             <button class="button">
-                                <a class="link_reject" href="{% url 'tool-add-comment' project.id reqs.id %}">Dodaj komentarz</a>
+                                <a class="link_reject" href="{% url 'tool-add-comment' project.id reqs.id 0 %}">Add comment</a>
                             </button>
                         </td>
                         <td class="td_reject">
-                            <button class="button">
-                                <a class="link_reject" href="{% url 'tool-reject' project.id reqs.id %}">Odrzuć</a>
-                            </button>
+                            <form method="POST">
+                                {% csrf_token %}
+                                <input type="hidden" value="{{ reqs.id }}" name="id">
+                                <button class="button">
+                                    <a class="link_reject" href="{% url 'tool-reject' project.id reqs.id %}">Reject</a>
+                                </button>
+                            </form>
                         </td>
                     </tr>
                 {% endif %}

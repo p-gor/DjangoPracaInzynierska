@@ -8,9 +8,49 @@
         </div>
     {% else %}:
         {% if Req.comment %}:
-            <div class="napis">
-                {{ Req.comment }}
-            </div>
+            {% if if_checklist == 0 %}:
+                <div class="napis">
+                    <p style="color: gold">{{ Req.requirement.requirement_name }}</p>
+                </div>
+                <div class="napis_if">
+                   {{ Req.comment }}
+                </div>
+                <div class="content_new_comment">
+                    <form method="POST">
+                        <table>
+                            {%  csrf_token %}
+                            {{ form.as_table }}
+                        </table>
+                        <button class="add_comment_button" type="submit">Add comment</button>
+                    </form>
+                </div>
+                <div class="back">
+                    <button class="button">
+                        <a class="link_reject" href="{% url 'tool-checklist' project.id chapter.id %}">Back</a>
+                    </button>
+                </div>
+            {% else %}:
+                <div class="napis">
+                    <p style="color: gold">{{ Req.requirement.requirement_name }}</p>
+                </div>
+                <div class="napis_if">
+                   {{ Req.comment }}
+                </div>
+                <div class="content_new_comment">
+                    <form method="POST">
+                        <table>
+                            {%  csrf_token %}
+                            {{ form.as_table }}
+                        </table>
+                        <button class="add_comment_button" type="submit">Add comment</button>
+                    </form>
+                </div>
+                <div class="back">
+                    <button class="button">
+                        <a class="link_reject" href="{% url 'tool-rejected' project.id %}">Back</a>
+                    </button>
+                </div>
+            {% endif %}
         {% else %}:
             <div class="napis">
                 <p> Dodaj komentarz do wymagania</p>
@@ -22,7 +62,7 @@
                         {%  csrf_token %}
                         {{ form.as_table }}
                     </table>
-                    <button class="add_comment_button" type="submit">Dodaj komentarz</button>
+                    <button class="add_comment_button" type="submit">Add comment</button>
                 </form>
             </div>
         {% endif %}

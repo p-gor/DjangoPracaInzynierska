@@ -18,12 +18,12 @@
                             <form method="POST">
                                 {% csrf_token %}
                                 <input type="hidden" value="{{ project.id }}" name="id">
-                                <button class="button" type="submit">Usuń projekt</button>
+                                <button class="button" type="submit">Delete</button>
                             </form>
                         </td>
                     {% endif %}
                     <td class="td_generuj">
-                        <button class="button" type="submit">Generuj</button>
+                        <button class="button" type="submit">Generate</button>
                     </td>
                 </tr>
             {% endfor %}

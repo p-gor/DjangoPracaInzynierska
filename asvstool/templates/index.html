@@ -20,7 +20,7 @@
                 {% if user.type_account == 0 %}
                     <li><a class="nav" href="{% url 'tool-add_project' %}">New Project</a></li>
                 {% endif %}
-                <li><a class="nav" href="{% url 'tool-about' %}">About standard OWASP ASVS</a></li>
+                <li><a class="nav" href="{% url 'tool-about' %}">About ASVS</a></li>
                 {% if user.is_authenticated %}
                     <li><a class="log" href="{% url 'logout' %}">Logout</a></li>
                     <li><a class="reg" href="{% url 'tool-profile' %}">Profile</a></li>

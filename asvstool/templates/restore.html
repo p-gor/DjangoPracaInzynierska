@@ -9,11 +9,11 @@
     {% else %}:
         {% if if_post == 0 %}:
             <div class="napis_odrzucono">
-                <p>Pomyślnie odrzucono wymaganie!</p>
+                <p>Pomyślnie przywrócono wymaganie!</p>
             </div>
             <div class="back">
                 <button class="button">
-                    <a class="link_reject" href="{% url 'tool-checklist' project.id chapter.id %}">Back</a>
+                    <a class="link_reject" href="{% url 'tool-rejected' project.id %}">Back</a>
                 </button>
             </div>
         {% else %}:
@@ -23,7 +23,7 @@
                 </div>
             {% endif %}
                 <div class="napis">
-                    <p> Czy na pewno chcesz odrzucić wymaganie?</p>
+                    <p> Czy na pewno chcesz przywrócić wymaganie?</p>
                     <p style="color: gold">{{ Req.requirement.requirement_name }}</p>
                 </div>
                 <div class="l_but">
@@ -36,7 +36,7 @@
                 </div>
                 <div class="r_but">
                     <button class="button">
-                            <a class="link_reject" href="{% url 'tool-checklist' project.id chapter.id %}">No</a>
+                            <a class="link_reject" href="{% url 'tool-rejected' project.id %}">No</a>
                     </button>
                 </div>
             {% endif %}
