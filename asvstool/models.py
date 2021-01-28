@@ -85,13 +85,13 @@ class Project(models.Model):
                                   db_column='username', related_name='+')
     requirements = models.ManyToManyField(Requirement, through='ReqsProject')
     Okresl_poziom_bezpieczenstwa = models.IntegerField(default=None)
-    # 1 - L1
-    # 2 - L2
-    # 3 - L3
+    # 0 - L1
+    # 1 - L2
+    # 2 - L3
     Okresl_metode_testowania = models.IntegerField(default=None)
-    # 1 - white box
-    # 2 - black box
-    # 3 - gray box
+    # 0 - white box
+    # 1 - black box
+    # 2 - gray box
     Okresl_dostep_do_dokumentacji = models.BooleanField(default=False)
     # 0 - brak dostępu do dokumentacji
     # 1 - udzielony dostęp do dokumentacji

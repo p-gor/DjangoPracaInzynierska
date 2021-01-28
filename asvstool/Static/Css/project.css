@@ -16,7 +16,7 @@
         overflow: hidden;
         overflow-y:scroll;
         height: auto;
-        max-height: 50vh;
+        max-height: 60vh;
         margin: 3vh auto 0 auto;
     }
 
@@ -36,10 +36,10 @@
     }
 
     .td_delete{
-        width: 10%;
+        width: 6%;
     }
 
-    .td_generuj{
+    .td_download{
         width: 6%;
     }
 

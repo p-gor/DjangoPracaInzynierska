@@ -1,18 +1,18 @@
-    .about_box{
-        width: 90%;
-        height: 80%;
-        margin: 5vh 0 0 5vh;
-    }
-
     .app-text{
-        width: 100%;
-        float: left;
+        text-align: center;
     }
 
     .app-text h1{
+        margin: 3vh auto 0 auto;
         font-size: 50px;
         position: relative;
         color: white;
+        text-align: center;
+    }
+
+    .content {
+        width: 80%;
+        margin: 3vh auto 0 auto;
     }
 
     .cal
@@ -76,4 +76,25 @@
         border: solid white;
         color: white;
         border-radius: 60px;
+    }
+
+    .back{
+        margin: 3vh auto 0 auto;
+        width: 3.7%;
+    }
+
+    .button{
+        padding:15px;
+        border-radius: 20px;
+        border: solid white;
+        outline: none;
+        cursor: pointer;
+        background-color: #8288AE;
+        margin: 1% 0;
+    }
+
+    .link_back{
+        text-decoration: none;
+        color: white;
+        font-size: 15px;
     }

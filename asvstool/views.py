@@ -1,8 +1,10 @@
 from django.shortcuts import render, redirect
+from django.http import HttpResponse
 from .models import Chapter, Subsection, Requirement, Project, ReqsProject
 from users.models import Account
 from .forms import AddProject, AddComment
 from django.contrib.auth.decorators import login_required
+import csv
 
 
 # Create your views here.
@@ -13,9 +15,40 @@ def home(request):
 
 @login_required
 def project(request):
-    if request.method == "POST":
-        obiekt = Project.objects.get(id=request.POST.get('id'))
-        obiekt.delete()
+    typ_konta = Account.objects.get(username=request.user.username).type_account
+    if typ_konta == 0:
+        if request.method == "POST":
+            obiekt = Project.objects.get(id=request.POST.get('id'))
+            obiekt.delete()
+    else:
+        if request.method == "POST":
+            response = HttpResponse(content_type='text/csv')
+            writer = csv.writer(response)
+            writer.writerow(['Chapter', 'Subsection', 'Requirement', 'Level 1', 'Level 2', 'Level 3',
+                             'NIST', 'CWE', 'Status'])
+            count = ReqsProject.objects.all().filter(project=request.POST.get('id')).count()
+            index = ReqsProject.objects.all().filter(project=request.POST.get('id')).first().id
+            for i in range(count):
+                req = (ReqsProject.objects.all().filter(
+                    project=request.POST.get('id')).first().requirement.subsection_nr.chapter_nr.chapter_title,
+                       ReqsProject.objects.all().filter(project=request.POST.get('id')).get(
+                           id=index + i).requirement.subsection_nr.subsection_name,
+                       ReqsProject.objects.all().filter(project=request.POST.get('id')).get(
+                           id=index + i).requirement.requirement_name,
+                       ReqsProject.objects.all().filter(project=request.POST.get('id')).get(
+                           id=index + i).requirement.lvl1,
+                       ReqsProject.objects.all().filter(project=request.POST.get('id')).get(
+                           id=index + i).requirement.lvl2,
+                       ReqsProject.objects.all().filter(project=request.POST.get('id')).get(
+                           id=index + i).requirement.lvl3,
+                       ReqsProject.objects.all().filter(project=request.POST.get('id')).get(
+                           id=index + i).requirement.nist,
+                       ReqsProject.objects.all().filter(project=request.POST.get('id')).get(
+                           id=index + i).requirement.cwe,
+                       ReqsProject.objects.all().filter(project=request.POST.get('id')).get(id=index + i).status)
+                writer.writerow(req)
+            response['Content-Disposition'] = 'attachment; filename="Checklist.csv"'
+            return response
     context_klient = {
         'Obiekty': Project.objects.all().filter(klient=request.user).order_by('date_made').reverse(),
         'title': 'Project',
@@ -24,11 +57,12 @@ def project(request):
         'Obiekty': Project.objects.all().filter(Pentester=request.user).order_by('date_made').reverse(),
         'title': 'Project'
     }
-    typ_konta = Account.objects.get(username=request.user.username).type_account
+
     if typ_konta == 0:
         return render(request, 'project.html', context_klient)
     else:
         return render(request, 'project.html', context_pentester)
+
 
 @login_required
 def add_project(request):
@@ -64,12 +98,42 @@ def add_project(request):
 def details_project(request, id):
     email = Account.objects.get(username=request.user.username)
     if (Project.objects.get(id=id).klient == email) or (Project.objects.get(id=id).Pentester == email):
+        count = Requirement.objects.all().count()
+        index = Requirement.objects.all().first().id
         context = {
             'Name': Project.objects.get(id=id).project_name,
             'project': Project.objects.get(id=id),
+            'checklist': ReqsProject.objects.all().filter(project=id),
             'title': 'Project Details'
         }
-        return render(request, 'details_project.html', context)
+        if request.method == 'POST':
+            for i in range(count):
+                object = ReqsProject(project=Project.objects.get(id=id),
+                                     requirement=Requirement.objects.get(id=index + i),
+                                     comment="")
+                object.save()
+            count_object = ReqsProject.objects.all().filter(project=id).count()
+            index = ReqsProject.objects.all().filter(project=id).first().id
+            for i in range(count_object):
+                object = ReqsProject.objects.all().filter(project=id).get(id=index + i)
+                if Project.objects.get(id=id).Okresl_poziom_bezpieczenstwa == 0:
+                    if (ReqsProject.objects.all().filter(project=id).get(id=index + i).requirement.lvl3) or (
+                            ReqsProject.objects.all().filter(project=id).get(id=index + i).requirement.lvl2):
+                        object.status = 0
+                    else:
+                        object.status = 1
+                elif Project.objects.get(id=id).Okresl_poziom_bezpieczenstwa == 1:
+                    if ReqsProject.objects.all().filter(project=id).get(id=index + i).requirement.lvl3:
+                        object.status = 0
+                    else:
+                        object.status = 1
+                elif Project.objects.get(id=id).Okresl_poziom_bezpieczenstwa == 2:
+                    if ReqsProject.objects.all().filter(project=id).get(id=index + i).requirement.lvl3:
+                        object.status = 1
+                object.save()
+            return render(request, 'details_project.html', context)
+        else:
+            return render(request, 'details_project.html', context)
     else:
         context = {
             'info': 'Nie masz dostępu do tego projektu',
@@ -88,7 +152,8 @@ def checklist(request, id, id_state):
             'Name': Project.objects.get(id=id).project_name,
             'project': Project.objects.get(id=id),
             'chapter': chapter,
-            'Obiekty': Obiekty,
+            'Obiekty': Obiekty.order_by('id'),
+            'checklist': ReqsProject.objects.all().filter(project=id),
             'title': 'Checklist'
         }
         return render(request, 'checklist.html', context)
@@ -98,6 +163,7 @@ def checklist(request, id, id_state):
             'title': 'checklist'
         }
         return render(request, 'checklist.html', context)
+
 
 @login_required
 def rejected(request, id):
@@ -109,7 +175,8 @@ def rejected(request, id):
             'Name': Project.objects.get(id=id).project_name,
             'project': Project.objects.get(id=id),
             'chapter': chapter,
-            'Obiekty': Obiekty,
+            'Obiekty': Obiekty.order_by('id'),
+            'checklist': ReqsProject.objects.all().filter(project=id),
             'title': 'Rejected Requirements'
         }
         return render(request, 'rejected.html', context)
@@ -136,6 +203,7 @@ def add_comment(request, id_project, id_requirement, pk):
                 'Req': ReqsProject.objects.get(id=id_requirement),
                 'title': 'Add Comment',
                 'chapter': ReqsProject.objects.get(id=id_requirement).requirement.subsection_nr.chapter_nr,
+                'checklist': ReqsProject.objects.all().filter(project=id_project),
                 'if_checklist': pk,
                 'form': form,
             }
@@ -149,6 +217,7 @@ def add_comment(request, id_project, id_requirement, pk):
                 'chapter': ReqsProject.objects.get(id=id_requirement).requirement.subsection_nr.chapter_nr,
                 'title': 'Add Comment',
                 'if_checklist': pk,
+                'checklist': ReqsProject.objects.all().filter(project=id_project),
                 'form': form,
             }
             return render(request, 'add_comment.html', context)
@@ -169,6 +238,7 @@ def reject(request, id_project, id_requirement):
         'Req': ReqsProject.objects.get(id=id_requirement),
         'title': 'Reject',
         'chapter': ReqsProject.objects.get(id=id_requirement).requirement.subsection_nr.chapter_nr,
+        'checklist': ReqsProject.objects.all().filter(project=id_project),
     }
     if (Project.objects.get(id=id_project).klient == email) or (Project.objects.get(id=id_project).Pentester == email):
         if request.method == 'POST':
@@ -181,6 +251,7 @@ def reject(request, id_project, id_requirement):
                 'Req': ReqsProject.objects.get(id=id_requirement),
                 'title': 'Reject',
                 'chapter': ReqsProject.objects.get(id=id_requirement).requirement.subsection_nr.chapter_nr,
+                'checklist': ReqsProject.objects.all().filter(project=id_project),
                 'if_post': 0,
             }
             return render(request, 'reject.html', context)
@@ -203,6 +274,7 @@ def restore(request, id_project, id_requirement):
         'Req': ReqsProject.objects.get(id=id_requirement),
         'title': 'Reject',
         'chapter': ReqsProject.objects.get(id=id_requirement).requirement.subsection_nr.chapter_nr,
+        'checklist': ReqsProject.objects.all().filter(project=id_project),
     }
     if (Project.objects.get(id=id_project).klient == email) or (Project.objects.get(id=id_project).Pentester == email):
         if request.method == 'POST':
@@ -215,6 +287,7 @@ def restore(request, id_project, id_requirement):
                 'Req': ReqsProject.objects.get(id=id_requirement),
                 'title': 'Reject',
                 'chapter': ReqsProject.objects.get(id=id_requirement).requirement.subsection_nr.chapter_nr,
+                'checklist': ReqsProject.objects.all().filter(project=id_project),
                 'if_post': 0,
             }
             return render(request, 'restore.html', context)
@@ -251,6 +324,7 @@ def subsection(request, pk):
 def tests(request, pk):
     context = {
         'Obiekty': Requirement.objects.all().filter(subsection_nr_id=pk).order_by('pk'),
+        'chapter_id': Subsection.objects.get(id=pk).chapter_nr_id,
         'Name': Subsection.objects.get(id=pk).subsection_name,
         'title': 'Tests'
     }

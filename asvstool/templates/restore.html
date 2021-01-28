@@ -2,12 +2,12 @@
 {% load static %}
 {% block content_project %}
     <link rel="stylesheet" type="text/css" href="{% static 'Css/reject_restore.css' %}">
-    {% if info %}:
+    {% if info %}
         <div class="napis">
             <p>Nie masz dostępu do utworzonego projektu!</p>
         </div>
-    {% else %}:
-        {% if if_post == 0 %}:
+    {% else %}
+        {% if if_post == 0 %}
             <div class="napis_odrzucono">
                 <p>Pomyślnie przywrócono wymaganie!</p>
             </div>
@@ -16,8 +16,8 @@
                     <a class="link_reject" href="{% url 'tool-rejected' project.id %}">Back</a>
                 </button>
             </div>
-        {% else %}:
-            {% if Req.comment %}:
+        {% else %}
+            {% if Req.comment %}
                 <div class="napis_if">
                     {{ Req.comment }}
                 </div>
