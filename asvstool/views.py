@@ -116,6 +116,7 @@ def details_project(request, id):
             index = ReqsProject.objects.all().filter(project=id).first().id
             for i in range(count_object):
                 object = ReqsProject.objects.all().filter(project=id).get(id=index + i)
+                # Poziom bezpieczenstwa
                 if Project.objects.get(id=id).Okresl_poziom_bezpieczenstwa == 0:
                     if (ReqsProject.objects.all().filter(project=id).get(id=index + i).requirement.lvl3) or (
                             ReqsProject.objects.all().filter(project=id).get(id=index + i).requirement.lvl2):
@@ -127,9 +128,22 @@ def details_project(request, id):
                         object.status = 0
                     else:
                         object.status = 1
-                elif Project.objects.get(id=id).Okresl_poziom_bezpieczenstwa == 2:
+                else:
                     if ReqsProject.objects.all().filter(project=id).get(id=index + i).requirement.lvl3:
                         object.status = 1
+                # Metoda testowania
+                if Project.objects.get(id=id).Okresl_metode_testowania == 0 and object.status == 1:
+                    object.status = 1
+                elif Project.objects.get(id=id).Okresl_metode_testowania == 1 and object.status == 1:
+                    if ReqsProject.objects.all().filter(project=id).get(id=index + i).requirement.black_box:
+                        object.status = 1
+                    else:
+                        object.status = 0
+                elif Project.objects.get(id=id).Okresl_metode_testowania == 2 and object.status == 1:
+                    if ReqsProject.objects.all().filter(project=id).get(id=index + i).requirement.gray_box:
+                        object.status = 1
+                    else:
+                        object.status = 0
                 object.save()
             return render(request, 'details_project.html', context)
         else:

@@ -28,21 +28,20 @@ class Requirement(models.Model):
     lvl1 = models.BooleanField(default=True)
     lvl2 = models.BooleanField(default=True)
     lvl3 = models.BooleanField(default=True)
-    metoda_testowania = models.IntegerField(default=None)
-    # 0 - white box
-    # 1 - black box
-    # 2 - gray box
+    white_box = models.BooleanField(default=True)
+    black_box = models.BooleanField(default=True)
+    gray_box = models.BooleanField(default=True)
     dostep_do_dokumentacji = models.BooleanField(default=False)
-    # 0 - niewymagany dostęp do dokumentacji
+    # 0 - nie dotyczy
     # 1 - wymagany dostęp do dokumentacji
     dostep_do_kodu = models.BooleanField(default=False)
-    # 0 - niewyagany dostęp do kodu
+    # 0 - nie dotyczy
     # 1 - wymagany dostęp do kodu
     dostep_do_mechanizmow_kryptograficznych = models.BooleanField(default=False)
-    # 0 - niewymagany dostęp do mechanizmów kryptograficznych
+    # 0 - nie dotyczy
     # 1 - wymagany dostęp do mechanizmów kryptograficznych
     dostep_do_dziennika_zdarzen = models.BooleanField(default=False)
-    # 0 - niewymagany dostęp do dziennika zdarzeń
+    # 0 - nie dotyczy
     # 1 - wymagany dostęp do dziennika zdarzeń
     tworzenie_kont = models.BooleanField(default=False)
     # 0 - nie dotyczy
