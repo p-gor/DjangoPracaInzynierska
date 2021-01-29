@@ -22,8 +22,8 @@ class Subsection(models.Model):
 
 class Requirement(models.Model):
     subsection_nr = models.ForeignKey(Subsection, on_delete=models.CASCADE)
-    requirement_name = models.CharField(max_length=256, default=None)
-    nist = models.CharField(max_length=10, blank=True, null=True, default=None)
+    requirement_name = models.CharField(max_length=1024, default=None)
+    nist = models.CharField(max_length=256, blank=True, null=True, default=None)
     cwe = models.CharField(max_length=10, blank=True, null=True, default=None)
     lvl1 = models.BooleanField(default=True)
     lvl2 = models.BooleanField(default=True)
@@ -144,7 +144,7 @@ class ReqsProject(models.Model):
     status = models.BooleanField(default=True)
     # 0 - Odrzucony
     # 1 - Przyjęty
-    comment = models.CharField(max_length=256, default=None, blank=True)
+    comment = models.CharField(max_length=1024, default=None, blank=True)
 
     class Meta:
         unique_together = [['project', 'requirement']]

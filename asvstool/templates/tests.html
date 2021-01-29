@@ -5,56 +5,66 @@
     <div class="app-text">
         <h1>About ASVS</h1>
     </div>
-    <div class="content">
-        <table class="test">
-            <thead>
-            <tr>
-                <th class="ops_req" style="text-align: center;">{{ Name }}</th>
-                <th class="ops_req">L1</th>
-                <th class="ops_req">L2</th>
-                <th class="ops_req">L3</th>
-                <th class="ops_req">CWE</th>
-                <th class="ops_req">NIST</th>
-            </tr>
-            </thead>
-            {% for tests in Obiekty %}
+    {% if Obiekty %}
+        <div class="content_req">
+            <table class="test_req">
+                <thead>
                 <tr>
-                    <td class="td_req">
-                        <a class="req">{{ tests.requirement_name }}</a><br>
-                    </td>
-                    <td class="td_req" style="text-align: center;">
-                        {% if tests.lvl1 == 1 %}
-                            &#x2713;
-                        {% endif %}
-                    </td>
-                    <td class="td_req" style="text-align: center;">
-                        {% if tests.lvl2 == 1 %}
-                            &#x2713;
-                        {% endif %}
-                    </td>
-                    <td class="td_req" style="text-align: center;">
-                        {% if tests.lvl3 == 1 %}
-                            &#x2713;
-                        {% endif %}
-                    </td>
-                    <td class="td_req" style="text-align: center;">
-                        {% if tests.cwe != None %}
-                            {{ tests.cwe }}
-                        {% endif %}
-                    </td>
-                    <td class="td_req" style="text-align: center;">
-                        {% if tests.nist != None %}
-                            {{ tests.nist }}
-                        {% endif %}
-                    </td>
+                    <th class="ops_req" style="text-align: center;">{{ Name }}</th>
+                    <th class="ops_req">L1</th>
+                    <th class="ops_req">L2</th>
+                    <th class="ops_req">L3</th>
+                    <th class="ops_req">CWE</th>
+                    <th class="ops_req">NIST</th>
                 </tr>
-            {% endfor %}
-            </table>
-            <div class="back">
-                <button class="button">
-                    <a class="link_back" href="{% url 'tool-subsection' chapter_id %}">Back</a>
-                </button>
-            </div>
+                </thead>
+                {% for tests in Obiekty %}
+                    <tr>
+                        <td class="td_req">
+                            <a class="req">{{ tests.requirement_name }}</a><br>
+                        </td>
+                        <td class="td_req" style="text-align: center;">
+                            {% if tests.lvl1 == 1 %}
+                                &#x2713;
+                            {% endif %}
+                        </td>
+                        <td class="td_req" style="text-align: center;">
+                            {% if tests.lvl2 == 1 %}
+                                &#x2713;
+                            {% endif %}
+                        </td>
+                        <td class="td_req" style="text-align: center;">
+                            {% if tests.lvl3 == 1 %}
+                                &#x2713;
+                            {% endif %}
+                        </td>
+                        <td class="td_req" style="text-align: center;">
+                            {% if tests.cwe != None %}
+                                {{ tests.cwe }}
+                            {% endif %}
+                        </td>
+                        <td class="td_req" style="text-align: center;">
+                            {% if tests.nist != None %}
+                                {{ tests.nist }}
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
+                </table>
         </div>
-    </div>
+        <div class="back">
+            <button class="button">
+                <a class="link_back" href="{% url 'tool-subsection' chapter_id %}">Back</a>
+            </button>
+        </div>
+    {% else %}
+        <div style="border: solid white" class="napis">
+            <p>Rozdział {{ Name }} nie zawiera na obecną chwilę żadnych wymagań</p>
+        </div>
+        <div class="back">
+            <button class="button">
+                <a class="link_back" href="{% url 'tool-subsection' chapter_id %}">Back</a>
+            </button>
+        </div>
+    {% endif %}
 {% endblock content %}

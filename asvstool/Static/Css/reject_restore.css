@@ -8,7 +8,7 @@
         border: solid white;
         width: 120vh;
 }
-.napis_odrzucono{
+.napis_final{
         font-size: 30px;
         margin: 3vh auto 0 auto;
         text-align: center;
@@ -28,6 +28,17 @@
         border: solid white;
         width: 120vh;
 }
+
+.napis_com{
+        font-size: 30px;
+        margin: 3vh auto 0 auto;
+        text-align: center;
+        background: #42455a;
+        color: #b2b1b1;
+        border-radius: 40px;
+        border: solid white;
+        width: 120vh;
+    }
 
 .back{
         margin: 0 auto 0 auto;
@@ -59,7 +70,7 @@
 .link_reject{
         text-decoration: none;
         color: white;
-        font-size: 15px;
+        font-size: 20px;
 }
 
 .back{

@@ -8,7 +8,7 @@
         </div>
     {% else %}
         {% if if_post == 0 %}
-            <div class="napis_odrzucono">
+            <div class="napis_final">
                 <p>Pomyślnie przywrócono wymaganie!</p>
             </div>
             <div class="back">
@@ -22,7 +22,7 @@
                     {{ Req.comment }}
                 </div>
             {% endif %}
-                <div class="napis">
+                <div class="napis_com">
                     <p> Czy na pewno chcesz przywrócić wymaganie?</p>
                     <p style="color: gold">{{ Req.requirement.requirement_name }}</p>
                 </div>

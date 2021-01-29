@@ -15,6 +15,19 @@
         margin: 3vh auto 0 auto;
     }
 
+    .content_req {
+        width: 80%;
+        margin: 3vh auto 0 auto;
+        overflow: hidden;
+        overflow-y:scroll;
+        height: auto;
+        max-height: 65vh;
+    }
+
+    .test_req{
+        width: 100%;
+    }
+
     .cal
     {
         border-collapse: separate;
@@ -97,4 +110,15 @@
         text-decoration: none;
         color: white;
         font-size: 15px;
+    }
+
+    .napis{
+        font-size: 30px;
+        margin: 3vh auto 0 auto;
+        text-align: center;
+        background: #42455a;
+        color: #b2b1b1;
+        border-radius: 60px;
+        border: solid white;
+        width: 80vh;
     }
