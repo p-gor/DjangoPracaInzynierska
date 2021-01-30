@@ -3,22 +3,94 @@
 {% block content %}
     <link rel="stylesheet" type="text/css" href="{% static 'Css/register.css' %}">
     <div class="content_register">
-        <h1>Join to ASVS Tool</h1>
+        <h1>Dołącz do ASVS Tool!</h1>
         <form method="POST">
             {% csrf_token %}
             <div class="form_div">
                 <table>
-                    {{ form.as_table }}
+                    <tbody>
+                        <tr>
+                            <th>
+                                <div style="margin-bottom: 10px">
+                                    Nazwa użytkownika
+                                </div>
+                            </th>
+                            <td>
+                                <div style="margin-bottom: 10px">
+                                    {{ form.username }}
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                <div style="margin-bottom: 10px">
+                                    Adres email
+                                </div>
+                            </th>
+                            <td>
+                                <div style="margin-bottom: 10px">
+                                    {{ form.email }}
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                <div style="margin-bottom: 10px">
+                                    Imię
+                                </div>
+                            </th>
+                            <td>
+                                <div style="margin-bottom: 10px">
+                                    {{ form.first_name }}
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                <div style="margin-bottom: 10px">
+                                    Nazwisko
+                                </div>
+                            </th>
+                            <td>
+                                <div style="margin-bottom: 10px">
+                                    {{ form.last_name }}
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                <div style="margin-bottom: 10px">
+                                    Hasło
+                                </div>
+                            </th>
+                            <td>
+                                <div style="margin-bottom: 10px">
+                                    {{ form.password1 }}
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                <div style="margin-bottom: 10px">
+                                    Potwierdź hasło
+                                </div>
+                            </th>
+                            <td>
+                                <div style="margin-bottom: 10px">
+                                    {{ form.password2 }}
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
                 </table>
             </div>
-            <br>
             <div>
-                <button class="sign_button" type="submit">Sign Up</button>
+                <button class="sign_button" type="submit">Zarejestruj się</button>
             </div>
             <br>
         </form>
         <div>
-            Already have an account? <a class="sign_l" href="{% url 'login' %}">Sign In</a>
+            Posiadasz konto w ASVS Tool? <a class="sign_l" href="{% url 'login' %}">Zaloguj się</a>
         </div>
     </div>
 {% endblock content %}

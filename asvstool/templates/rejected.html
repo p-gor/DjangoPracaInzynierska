@@ -4,7 +4,7 @@
     <link rel="stylesheet" type="text/css" href="{% static 'Css/checklist.css' %}">
     {% if info %}
         <div class="napis">
-            <p>You don't have access to this project!</p>
+            <p>Nie masz dostępu do tego projektu!</p>
         </div>
     {% else %}
         <div class="scroll">
@@ -22,12 +22,12 @@
                         </td>
                         <td class="td_add_comment">
                             <button class="button">
-                                <a class="link_reject" href="{% url 'tool-add-comment-rejectlist' project.id reqs.id 1 %}">Add comment</a>
+                                <a class="link_reject" href="{% url 'tool-add-comment-rejectlist' project.id reqs.id 1 %}">Dodaj komentarz</a>
                             </button>
                         </td>
                         <td class="td_reject">
                             <button class="button">
-                                <a class="link_reject" href="{% url 'tool-restore' project.id reqs.id %}">Restore</a>
+                                <a class="link_reject" href="{% url 'tool-restore' project.id reqs.id %}">Przywróć</a>
                             </button>
                         </td>
                     </tr>

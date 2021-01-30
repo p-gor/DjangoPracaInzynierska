@@ -3,22 +3,46 @@
 {% block content %}
     <link rel="stylesheet" type="text/css" href="{% static 'Css/register.css' %}">
     <div class="content_register">
-        <h1>Log In</h1>
+        <h1>Zaloguj</h1>
         <form method="POST">
             {% csrf_token %}
             <div class="form_div">
                 <table>
-                    {{ form.as_table }}
+                    <tbody>
+                        <tr>
+                            <th>
+                                <div style="margin-bottom: 10px">
+                                    Adres email
+                                </div>
+                            </th>
+                            <td>
+                                <div style="margin-bottom: 10px">
+                                    {{ form.username }}
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                <div style="margin-bottom: 10px">
+                                    Hasło
+                                </div>
+                            </th>
+                            <td>
+                                <div style="margin-bottom: 10px">
+                                    {{ form.password }}
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
                 </table>
             </div>
-            <br>
             <div>
-                <button class="sign_button" type="submit">Login</button>
+                <button class="sign_button" type="submit">Zaloguj</button>
             </div>
             <br>
         </form>
         <div>
-            New in ASVS Tool? <a class="sign_l" href="{% url 'register' %}">Sign Up</a>
+            Nie posiadasz konta w ASVS Tool? <a class="sign_l" href="{% url 'register' %}">Zarejestruj się</a>
         </div>
     </div>
 {% endblock content %}

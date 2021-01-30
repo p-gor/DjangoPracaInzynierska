@@ -52,11 +52,11 @@ def project(request):
             return response
     context_klient = {
         'Obiekty': Project.objects.all().filter(klient=request.user).order_by('date_made').reverse(),
-        'title': 'Project',
+        'title': 'Projekty',
     }
     context_pentester = {
         'Obiekty': Project.objects.all().filter(Pentester=request.user).order_by('date_made').reverse(),
-        'title': 'Project'
+        'title': 'Projekty'
     }
     if typ_konta == 0:
         return render(request, 'project.html', context_klient)
@@ -89,7 +89,7 @@ def add_project(request):
                 return redirect('tool-project')
         else:
             form = AddProject()
-        return render(request, 'add_project.html', {'title': 'New project', 'form': form})
+        return render(request, 'add_project.html', {'title': 'Nowy Projekt', 'form': form})
     else:
         return redirect('tool-project')
 
@@ -104,7 +104,7 @@ def details_project(request, id):
             'Name': Project.objects.get(id=id).project_name,
             'project': Project.objects.get(id=id),
             'checklist': ReqsProject.objects.all().filter(project=id),
-            'title': 'Project Details'
+            'title': 'Lista Kontrolna'
         }
         if request.method == 'POST':
             for i in range(count):
@@ -210,7 +210,7 @@ def details_project(request, id):
     else:
         context = {
             'info': 'Nie masz dostępu do tego projektu',
-            'title': 'Project Details'
+            'title': 'Lista Kontrolna'
         }
         return render(request, 'details_project.html', context)
 
@@ -227,13 +227,13 @@ def checklist(request, id, id_state):
             'chapter': chapter,
             'Obiekty': Obiekty.order_by('id'),
             'checklist': ReqsProject.objects.all().filter(project=id),
-            'title': 'Checklist'
+            'title': 'Lista Kontrolna - szczegóły'
         }
         return render(request, 'checklist.html', context)
     else:
         context = {
             'info': 'Nie masz dostępu do tego projektu',
-            'title': 'Checklist'
+            'title': 'Lista Kontrolna - szczegóły'
         }
         return render(request, 'checklist.html', context)
 
@@ -250,13 +250,13 @@ def rejectlist(request, id, id_state):
             'chapter': chapter,
             'Obiekty': Obiekty.order_by('id'),
             'checklist': ReqsProject.objects.all().filter(project=id),
-            'title': 'Reject list'
+            'title': 'Odrzucone - szczegóły'
         }
         return render(request, 'rejected.html', context)
     else:
         context = {
             'info': 'Nie masz dostępu do tego projektu',
-            'title': 'Reject list'
+            'title': 'Odrzucone - szczegóły'
         }
         return render(request, 'rejected.html', context)
 
@@ -269,13 +269,13 @@ def rejected(request, id):
             'Name': Project.objects.get(id=id).project_name,
             'project': Project.objects.get(id=id),
             'checklist': ReqsProject.objects.all().filter(project=id),
-            'title': 'Rejected Requirements'
+            'title': 'Odrzucone'
         }
         return render(request, 'details_rejected.html', context)
     else:
         context = {
             'info': 'Nie masz dostępu do tego projektu',
-            'title': 'Rejected Requirements'
+            'title': 'Odrzucone'
         }
         return render(request, 'details_rejected.html', context)
 
@@ -293,7 +293,7 @@ def add_comment(request, id_project, id_requirement, pk):
                 'Name': Project.objects.get(id=id_project).project_name,
                 'project': Project.objects.get(id=id_project),
                 'Req': ReqsProject.objects.get(id=id_requirement),
-                'title': 'Add Comment',
+                'title': 'Dodaj Komentarz',
                 'chapter': ReqsProject.objects.get(id=id_requirement).requirement.subsection_nr.chapter_nr,
                 'checklist': ReqsProject.objects.all().filter(project=id_project),
                 'form': form,
@@ -309,7 +309,7 @@ def add_comment(request, id_project, id_requirement, pk):
                 'project': Project.objects.get(id=id_project),
                 'Req': ReqsProject.objects.get(id=id_requirement),
                 'chapter': ReqsProject.objects.get(id=id_requirement).requirement.subsection_nr.chapter_nr,
-                'title': 'Add Comment',
+                'title': 'Dodaj Komentarz',
                 'checklist': ReqsProject.objects.all().filter(project=id_project),
                 'form': form,
             }
@@ -320,7 +320,7 @@ def add_comment(request, id_project, id_requirement, pk):
     else:
         context = {
             'info': 'Nie masz dostępu do tego projektu',
-            'title': 'Add Comment'
+            'title': 'Dodaj Komentarz'
         }
         if pk == 0:
             return render(request, 'add_comment_checklist.html', context)
@@ -335,7 +335,7 @@ def reject(request, id_project, id_requirement):
         'Name': Project.objects.get(id=id_project).project_name,
         'project': Project.objects.get(id=id_project),
         'Req': ReqsProject.objects.get(id=id_requirement),
-        'title': 'Reject',
+        'title': 'Odrzuć',
         'chapter': ReqsProject.objects.get(id=id_requirement).requirement.subsection_nr.chapter_nr,
         'checklist': ReqsProject.objects.all().filter(project=id_project),
     }
@@ -348,7 +348,7 @@ def reject(request, id_project, id_requirement):
                 'Name': Project.objects.get(id=id_project).project_name,
                 'project': Project.objects.get(id=id_project),
                 'Req': ReqsProject.objects.get(id=id_requirement),
-                'title': 'Reject',
+                'title': 'Odrzuć',
                 'chapter': ReqsProject.objects.get(id=id_requirement).requirement.subsection_nr.chapter_nr,
                 'checklist': ReqsProject.objects.all().filter(project=id_project),
                 'if_post': 0,
@@ -359,7 +359,7 @@ def reject(request, id_project, id_requirement):
     else:
         context = {
             'info': 'Nie masz dostępu do tego projektu',
-            'title': 'Reject'
+            'title': 'Odrzuć'
         }
         return render(request, 'reject.html', context)
 
@@ -371,7 +371,7 @@ def restore(request, id_project, id_requirement):
         'Name': Project.objects.get(id=id_project).project_name,
         'project': Project.objects.get(id=id_project),
         'Req': ReqsProject.objects.get(id=id_requirement),
-        'title': 'Reject',
+        'title': 'Przywróć',
         'chapter': ReqsProject.objects.get(id=id_requirement).requirement.subsection_nr.chapter_nr,
         'checklist': ReqsProject.objects.all().filter(project=id_project),
     }
@@ -384,7 +384,7 @@ def restore(request, id_project, id_requirement):
                 'Name': Project.objects.get(id=id_project).project_name,
                 'project': Project.objects.get(id=id_project),
                 'Req': ReqsProject.objects.get(id=id_requirement),
-                'title': 'Reject',
+                'title': 'Przywróć',
                 'chapter': ReqsProject.objects.get(id=id_requirement).requirement.subsection_nr.chapter_nr,
                 'checklist': ReqsProject.objects.all().filter(project=id_project),
                 'if_post': 0,
@@ -395,7 +395,7 @@ def restore(request, id_project, id_requirement):
     else:
         context = {
             'info': 'Nie masz dostępu do tego projektu',
-            'title': 'Reject'
+            'title': 'Przywróć'
         }
         return render(request, 'restore.html', context)
 
@@ -404,7 +404,7 @@ def restore(request, id_project, id_requirement):
 def about(request):
     context = {
         'Obiekty': Chapter.objects.all(),
-        'title': 'About'
+        'title': 'Rozdziały ASVS'
     }
     return render(request, 'about.html', context)
 
@@ -414,7 +414,7 @@ def subsection(request, pk):
     context = {
         'Obiekty': Subsection.objects.all().filter(chapter_nr_id=pk),
         'Name': Chapter.objects.get(id=pk).chapter_title,
-        'title': 'Subsection'
+        'title': 'Podrozdziały ASVS'
     }
     return render(request, 'subsection.html', context)
 
@@ -425,6 +425,6 @@ def tests(request, pk):
         'Obiekty': Requirement.objects.all().filter(subsection_nr_id=pk).order_by('pk'),
         'chapter_id': Subsection.objects.get(id=pk).chapter_nr_id,
         'Name': Subsection.objects.get(id=pk).subsection_name,
-        'title': 'Tests'
+        'title': 'Wymagania ASVS'
     }
     return render(request, 'tests.html', context)

@@ -4,10 +4,10 @@
     <link rel="stylesheet" type="text/css" href="{% static 'Css/details.css' %}">
     {% if info %}
         <div style="border: solid white" class="napis">
-            <p>You don't have access to this project!</p>
+            <p>Nie masz dostępu do tego projektu!</p>
         </div>
     {% else %}
-        <h1 class="project_h1">Rejected requirements for project {{ Name }} </h1>
+        <h1 class="project_h1">Odrzucone wymagania z projektu: {{ Name }} </h1>
         {% if checklist %}
             <br>
             <nav>
@@ -26,18 +26,18 @@
                     <li><a href="{% url 'tool-rejectlist' project.id 12 %}">V12</a></li>
                     <li><a href="{% url 'tool-rejectlist' project.id 13 %}">V13</a></li>
                     <li><a href="{% url 'tool-rejectlist' project.id 14 %}">V14</a></li>
-                    <li><a href="{% url 'tool-details' project.id %}">Checklist</a></li>
+                    <li><a href="{% url 'tool-details' project.id %}">Lista kontrolna</a></li>
                 </ul>
             </nav>
         {% else %}
             <div style="border: solid white" class="napis">
-                <p>The checklist has not been generated yet!</p>
+                <p>Lista kontrolna nie została jeszcze wygenerowana!</p>
             </div>
             <div class="generate">
                 <form method="POST">
                     {% csrf_token %}
                     <input type="hidden" value="{{ project.id }}" name="id">
-                    <button class="button" type="submit">Generate</button>
+                    <button class="button" type="submit">Generuj</button>
                 </form>
             </div>
         {% endif %}

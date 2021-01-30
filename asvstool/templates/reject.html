@@ -4,16 +4,16 @@
     <link rel="stylesheet" type="text/css" href="{% static 'Css/reject_restore.css' %}">
     {% if info %}
         <div class="napis">
-            <p>You don't have access to this project!</p>
+            <p>Nie masz dostępu do tego projektu!</p>
         </div>
     {% else %}
         {% if if_post == 0 %}
             <div class="napis_final">
-                <p>Successfully rejected the requirement!</p>
+                <p>Pomyślnie odrzucono wymaganie!</p>
             </div>
             <div class="back">
                 <button class="button">
-                    <a class="link_reject" href="{% url 'tool-checklist' project.id chapter.id %}">Back</a>
+                    <a class="link_reject" href="{% url 'tool-checklist' project.id chapter.id %}">Wróć</a>
                 </button>
             </div>
         {% else %}
@@ -23,20 +23,20 @@
                 </div>
             {% endif %}
                 <div class="napis_com">
-                    <p>Are you sure you want to reject this requirement?</p>
+                    <p>Czy na pewno chcesz odrzucić wymaganie?</p>
                     <p style="color: gold">{{ Req.requirement.requirement_name }}</p>
                 </div>
                 <div class="l_but">
                     <form method="POST">
                         {% csrf_token %}
                         <button class="button" type="submit">
-                                <p class="link_reject">Yes</p>
+                                <p class="link_reject">Tak</p>
                         </button>
                     </form>
                 </div>
                 <div class="r_but">
                     <button class="button">
-                            <a class="link_reject" href="{% url 'tool-checklist' project.id chapter.id %}">No</a>
+                            <a class="link_reject" href="{% url 'tool-checklist' project.id chapter.id %}">Nie</a>
                     </button>
                 </div>
             {% endif %}

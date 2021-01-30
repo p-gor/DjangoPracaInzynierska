@@ -4,7 +4,7 @@
     <link rel="stylesheet" type="text/css" href="{% static 'Css/add_comment.css' %}">
     {% if info %}
         <div class="napis">
-            <p>You don't have access to this project!</p>
+            <p>Nie masz dostępu do tego projektu!</p>
         </div>
     {% else %}
         {% if Req.comment %}
@@ -21,18 +21,18 @@
                         {{ form.as_table }}
                     </table>
                     <div class="td_add">
-                        <button class="add_button" type="submit">Add comment</button>
+                        <button class="add_button" type="submit">Dodaj komentarz</button>
                     </div>
                 </form>
             </div>
             <div class="back">
                 <button class="button">
-                    <a class="link_back" href="{% url 'tool-rejectlist' project.id chapter.id %}">Back</a>
+                    <a class="link_back" href="{% url 'tool-rejectlist' project.id chapter.id %}">Wróć</a>
                 </button>
             </div>
         {% else %}
             <div class="napis">
-                <p>Add comment to requirement:</p>
+                <p>Dodaj komentarz do wymagania.</p>
                 <p style="color: gold">{{ Req.requirement.requirement_name }}</p>
             </div>
             <div class="content_new_comment">
@@ -42,13 +42,13 @@
                         {{ form.as_table }}
                     </table>
                     <div class="td_add">
-                        <button class="add_button" type="submit">Add comment</button>
+                        <button class="add_button" type="submit">Dodaj komentarz</button>
                     </div>
                 </form>
             </div>
             <div class="back">
                 <button class="button">
-                    <a class="link_back" href="{% url 'tool-rejectlist' project.id chapter.id %}">Back</a>
+                    <a class="link_back" href="{% url 'tool-rejectlist' project.id chapter.id %}">Wróć</a>
                 </button>
             </div>
         {% endif %}

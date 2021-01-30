@@ -7,22 +7,81 @@
             <div class="image_container">
                 <img src="{{ user.profile.image.url }}">
             </div>
-            <h1>Hello, {{ user.first_name }} {{ user.last_name }}</h1>
+            <h1>Witaj, {{ user.first_name }} {{ user.last_name }}</h1>
             <p>{{ user.email }}</p>
         </div>
         <div class="content_update">
-            <h1>Profile</h1>
+            <h1>Profil</h1>
             <form method="POST" enctype="multipart/form-data">
                 {% csrf_token %}
                 <div class="form_div">
                     <table>
-                        {{ user_form.as_table }}
-                        {{ profile_form.as_table}}
+                        <tbody>
+                            <tr>
+                                <th>
+                                    <div style="margin-bottom: 10px">
+                                        Nazwa użytkownika
+                                    </div>
+                                </th>
+                                <td>
+                                    <div style="margin-bottom: 10px">
+                                        {{ user_form.username }}
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    <div style="margin-bottom: 10px">
+                                        Adres email
+                                    </div>
+                                </th>
+                                <td>
+                                    <div style="margin-bottom: 10px">
+                                        {{ user_form.email }}
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    <div style="margin-bottom: 10px">
+                                        Imię
+                                    </div>
+                                </th>
+                                <td>
+                                    <div style="margin-bottom: 10px">
+                                        {{ user_form.first_name }}
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    <div style="margin-bottom: 10px">
+                                        Nazwisko
+                                    </div>
+                                </th>
+                                <td>
+                                    <div style="margin-bottom: 10px">
+                                        {{ user_form.last_name }}
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    <div style="margin-bottom: 10px">
+                                        Zdjęcie profilowe
+                                    </div>
+                                </th>
+                                <td>
+                                    <div style="margin-bottom: 10px">
+                                        {{ profile_form.image }}
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
                     </table>
                 </div>
-                <br>
                 <div>
-                    <button class="update_button" type="submit">Update</button>
+                    <button class="update_button" type="submit">Aktualizuj</button>
                 </div>
                 <br>
             </form>

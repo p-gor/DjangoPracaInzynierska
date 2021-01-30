@@ -3,7 +3,7 @@
 {% block content %}
     <link rel="stylesheet" type="text/css" href="{% static 'Css/project.css' %}">
     <div class="app-text">
-        <h1>My Projects</h1>
+        <h1>Moje Projekty</h1>
     </div>
     {% if Obiekty %}
     <div class="scroll">
@@ -18,7 +18,7 @@
                             <form method="POST">
                                 {% csrf_token %}
                                 <input type="hidden" value="{{ project.id }}" name="id">
-                                <button class="button" type="submit">Delete</button>
+                                <button class="button" type="submit">Usuń</button>
                             </form>
                         </td>
                     {% else %}
@@ -26,7 +26,7 @@
                             <form method="POST">
                                 {% csrf_token %}
                                 <input type="hidden" value="{{ project.id }}" name="id">
-                                <button class="button" type="submit">Download</button>
+                                <button class="button" type="submit">Pobierz</button>
                             </form>
                         </td>
                     {% endif %}
@@ -37,11 +37,11 @@
     {% else %}
         {% if user.type_account == 1 %}
             <div class="napis">
-                <p>No assigned projects!</p>
+                <p>Brak przydzielonych projektów!</p>
             </div>
         {% else %}
             <div class="napis">
-                <p>No projects created!</p>
+                <p>Brak utworzonych projektów!</p>
             </div>
         {% endif %}
     {% endif %}

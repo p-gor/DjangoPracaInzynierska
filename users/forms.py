@@ -16,8 +16,8 @@ class UserRegisterForm(UserCreationForm):
                                 widget=forms.TextInput(attrs={'class': 'pr', 'title': 'Last name'}))
     password1 = forms.CharField(required=True, widget=forms.PasswordInput(
         attrs={'class': 'pr', 'title': 'Password'}))
-    password2 = forms.CharField(required=True,
-                                widget=forms.PasswordInput(attrs={'class': 'pr', 'title': 'Confirm password'}))
+    password2 = forms.CharField(required=True, widget=forms.PasswordInput(
+        attrs={'class': 'pr', 'title': 'Confirm password'}))
 
     class Meta:
         model = Account
@@ -65,6 +65,3 @@ class ProfileUpdateForm(forms.ModelForm):
     class Meta:
         model = Profile
         fields = ['image']
-        widgets = {
-            'Image': Textarea(attrs={'class': 'im'}),
-        }

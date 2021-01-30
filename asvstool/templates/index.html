@@ -16,17 +16,17 @@
         <div class="menu">
             <ul>
                 <li><a class="nav" href="{% url 'tool-home' %}">Home</a></li>
-                <li><a class="nav" href="{% url 'tool-project' %}">My Projects</a></li>
+                <li><a class="nav" href="{% url 'tool-project' %}">Moje Projekty</a></li>
                 {% if user.type_account == 0 %}
-                    <li><a class="nav" href="{% url 'tool-add_project' %}">New Project</a></li>
+                    <li><a class="nav" href="{% url 'tool-add_project' %}">Nowy Projekt</a></li>
                 {% endif %}
-                <li><a class="nav" href="{% url 'tool-about' %}">About ASVS</a></li>
+                <li><a class="nav" href="{% url 'tool-about' %}">O ASVS</a></li>
                 {% if user.is_authenticated %}
-                    <li><a class="log" href="{% url 'logout' %}">Logout</a></li>
-                    <li><a class="reg" href="{% url 'tool-profile' %}">Profile</a></li>
+                    <li><a class="log" href="{% url 'logout' %}">Wyloguj</a></li>
+                    <li><a class="reg" href="{% url 'tool-profile' %}">Profil</a></li>
                 {% else %}
-                    <li><a class="log" href="{% url 'login' %}">Login</a></li>
-                    <li><a class="reg" href="{% url 'register' %}">Register</a></li>
+                    <li><a class="log" href="{% url 'login' %}">Zaloguj</a></li>
+                    <li><a class="reg" href="{% url 'register' %}">Rejestracja</a></li>
                 {% endif %}
             </ul>
         </div>

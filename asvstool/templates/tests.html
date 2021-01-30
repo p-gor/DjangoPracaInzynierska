@@ -3,7 +3,7 @@
 {% block content %}
     <link rel="stylesheet" type="text/css" href="{% static 'Css/requirement.css' %}">
     <div class="app-text">
-        <h1>About ASVS</h1>
+        <h1>O ASVS</h1>
     </div>
     {% if Obiekty %}
         <div class="content_req">
@@ -54,16 +54,16 @@
         </div>
         <div class="back">
             <button class="button">
-                <a class="link_back" href="{% url 'tool-subsection' chapter_id %}">Back</a>
+                <a class="link_back" href="{% url 'tool-subsection' chapter_id %}">Wróć</a>
             </button>
         </div>
     {% else %}
         <div style="border: solid white" class="napis">
-            <p>Chapter {{ Name }} doesn't contain any requirements at this time!</p>
+            <p>Podrozdział {{ Name }} nie zawiera w tym momencie żadnych wymagań!</p>
         </div>
         <div class="back">
             <button class="button">
-                <a class="link_back" href="{% url 'tool-subsection' chapter_id %}">Back</a>
+                <a class="link_back" href="{% url 'tool-subsection' chapter_id %}">Wróć</a>
             </button>
         </div>
     {% endif %}
