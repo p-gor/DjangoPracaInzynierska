@@ -14,6 +14,20 @@
             <form method="POST">
                 <table>
                     {%  csrf_token %}
+                    <tbody>
+                            <tr>
+                                <th>
+                                    <div style="margin-bottom: 10px">
+                                        Nazwa projektu
+                                    </div>
+                                </th>
+                                <td>
+                                    <div style="margin-bottom: 10px">
+                                        {{ form.project_name }}
+                                    </div>
+                                </td>
+                            </tr>
+                    </tbody>
                     {{ form.as_table }}
                 </table>
                 <button class="add_button" type="submit">Utwórz</button>
@@ -24,7 +38,200 @@
             <form method="POST">
                 <table>
                     {%  csrf_token %}
-                    {{ form.as_table }}
+                    <tbody>
+                            <tr>
+                                <th>
+                                    <div style="margin-bottom: 10px; text-align: left; margin-top: 10px">
+                                        Nazwa projektu
+                                    </div>
+                                </th>
+                                <td>
+                                    <div style="margin-bottom: 10px; margin-top: 10px">
+                                        {{ form.project_name }}
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    <div style="margin-bottom: 10px; text-align: left">
+                                        Pentester
+                                    </div>
+                                </th>
+                                <td>
+                                    <div style="margin-bottom: 10px">
+                                        {{ form.Pentester }}
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    <div style="margin-bottom: 10px; text-align: left">
+                                        Określ poziom bezpieczeństwa
+                                    </div>
+                                </th>
+                                <td>
+                                    <div style="margin-bottom: 10px">
+                                        {{ form.Okresl_poziom_bezpieczenstwa }}
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    <div style="margin-bottom: 10px; text-align: left">
+                                        Określ metodę testowania
+                                    </div>
+                                </th>
+                                <td>
+                                    <div style="margin-bottom: 10px">
+                                        {{ form.Okresl_metode_testowania }}
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    <div style="margin-bottom: 10px; text-align: left">
+                                        Określ dostęp do dokumentacji
+                                    </div>
+                                </th>
+                                <td>
+                                    <div style="margin-bottom: 10px">
+                                        {{ form.Okresl_dostep_do_dokumentacji }}
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    <div style="margin-bottom: 10px; text-align: left">
+                                        Określ dostęp do kodu źródłowego
+                                    </div>
+                                </th>
+                                <td>
+                                    <div style="margin-bottom: 10px">
+                                        {{ form.Okresl_dostep_do_kodu_zrodlowego }}
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    <div style="margin-bottom: 10px; text-align: left">
+                                        Określ dostęp do mechanizmów kryptograficznych
+                                    </div>
+                                </th>
+                                <td>
+                                    <div style="margin-bottom: 10px">
+                                        {{ form.Okresl_dostep_do_mechanizmow_kryptograficznych }}
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    <div style="margin-bottom: 10px; text-align: left">
+                                        Określ dostęp do dziennika zdarzeń
+                                    </div>
+                                </th>
+                                <td>
+                                    <div style="margin-bottom: 10px">
+                                        {{ form.Okresl_dostep_do_dziennika_zdarzen }}
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    <div style="margin-bottom: 10px; text-align: left">
+                                        Określ możliwość tworzenia kont oraz logowania się
+                                    </div>
+                                </th>
+                                <td>
+                                    <div style="margin-bottom: 10px">
+                                        {{ form.Okresl_mozliwosc_tworzenia_kont }}
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    <div style="margin-bottom: 10px; text-align: left">
+                                        Określ czy zostało zaimplementowane MFA
+                                    </div>
+                                </th>
+                                <td>
+                                    <div style="margin-bottom: 10px">
+                                        {{ form.Okresl_zaimplementowanie_mfa }}
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    <div style="margin-bottom: 10px; text-align: left">
+                                        Określ czy aplikacja wykorzystuje usługi CSP
+                                    </div>
+                                </th>
+                                <td>
+                                    <div style="margin-bottom: 10px">
+                                        {{ form.Okresl_zaimplementowanie_csp }}
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    <div style="margin-bottom: 10px; text-align: left">
+                                        Określ możliwość wprowadzania danych
+                                    </div>
+                                </th>
+                                <td>
+                                    <div style="margin-bottom: 10px">
+                                        {{ form.Okresl_mozliwosc_wprowadzania_danych }}
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    <div style="margin-bottom: 10px; text-align: left">
+                                        Określ możliwość pobierania/wgrywania plików
+                                    </div>
+                                </th>
+                                <td>
+                                    <div style="margin-bottom: 10px">
+                                        {{ form.Okresl_mozliwosc_dzialania_na_plikach }}
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    <div style="margin-bottom: 10px; text-align: left">
+                                        Określ wykorzystywany mechanizm zarządzania sesją
+                                    </div>
+                                </th>
+                                <td>
+                                    <div style="margin-bottom: 10px">
+                                        {{ form.Okresl_wykorzystywany_mechanizm_zarzadzania_sesja }}
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    <div style="margin-bottom: 10px; text-align: left">
+                                        Określ wykorzystywany kod
+                                    </div>
+                                </th>
+                                <td>
+                                    <div style="margin-bottom: 10px">
+                                        {{ form.Okresl_wykorzystywany_kod }}
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th style="width: 60%">
+                                    <div style="margin-bottom: 10px; text-align: left">
+                                        Określ wykorzystywane usługi sieciowe
+                                    </div>
+                                </th>
+                                <td>
+                                    <div style="margin-bottom: 10px">
+                                        {{ form.Okresl_wykorzystywane_uslugi_sieciowe }}
+                                    </div>
+                                </td>
+                            </tr>
+                    </tbody>
                 </table>
                 <button class="add_button" type="submit">Utwórz</button>
             </form>
