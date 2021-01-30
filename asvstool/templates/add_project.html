@@ -7,8 +7,8 @@
     </div>
     {% if info %}
         <div class="napis">
-            <p>Projekt o podanej nazwie został już utworzony!<br>
-                Prosze podac inną nazwę projektu</p>
+            <p>A project with this name has already been created!<br>
+                Please enter a different project name</p>
         </div>
         <div class="content_new_project">
             <form method="POST">
@@ -16,7 +16,7 @@
                     {%  csrf_token %}
                     {{ form.as_table }}
                 </table>
-                <button class="add_button" type="submit">Dodaj projekt</button>
+                <button class="add_button" type="submit">Add new project</button>
             </form>
         </div>
     {% else %}
@@ -26,7 +26,7 @@
                     {%  csrf_token %}
                     {{ form.as_table }}
                 </table>
-                <button class="add_button" type="submit">Dodaj projekt</button>
+                <button class="add_button" type="submit">Add new project</button>
             </form>
         </div>
     {% endif %}

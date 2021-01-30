@@ -1,10 +1,10 @@
 {% extends 'details_project.html' %}
 {% load static %}
-{% block content_project %}
+{% block content_project_checklist %}
     <link rel="stylesheet" type="text/css" href="{% static 'Css/add_comment.css' %}">
     {% if info %}
         <div class="napis">
-            <p>Nie masz dostępu do utworzonego projektu!</p>
+            <p>You don't have access to this project!</p>
         </div>
     {% else %}
         {% if Req.comment %}
@@ -25,22 +25,14 @@
                     </div>
                 </form>
             </div>
-            {% if if_checklist == 0 %}
-                <div class="back">
-                    <button class="button">
-                        <a class="link_back" href="{% url 'tool-checklist' project.id chapter.id %}">Back</a>
-                    </button>
-                </div>
-            {% else %}
-                <div class="back">
-                    <button class="button">
-                        <a class="link_back" href="{% url 'tool-rejected' project.id %}">Back</a>
-                    </button>
-                </div>
-            {% endif %}
+            <div class="back">
+                <button class="button">
+                    <a class="link_back" href="{% url 'tool-checklist' project.id chapter.id %}">Back</a>
+                </button>
+            </div>
         {% else %}
             <div class="napis">
-                <p> Dodaj komentarz do wymagania:</p>
+                <p>Add comment to requirement:</p>
                 <p style="color: gold">{{ Req.requirement.requirement_name }}</p>
             </div>
             <div class="content_new_comment">
@@ -54,19 +46,11 @@
                     </div>
                 </form>
             </div>
-            {% if if_checklist == 0 %}
-                <div class="back">
-                    <button class="button">
-                        <a class="link_back" href="{% url 'tool-checklist' project.id chapter.id %}">Back</a>
-                    </button>
-                </div>
-            {% else %}
-                <div class="back">
-                    <button class="button">
-                        <a class="link_back" href="{% url 'tool-rejected' project.id %}">Back</a>
-                    </button>
-                </div>
-            {% endif %}
+            <div class="back">
+                <button class="button">
+                    <a class="link_back" href="{% url 'tool-checklist' project.id chapter.id %}">Back</a>
+                </button>
+            </div>
         {% endif %}
     {% endif %}
-{% endblock content_project %}
+{% endblock content_project_checklist %}

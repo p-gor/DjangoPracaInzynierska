@@ -1,0 +1,46 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block content %}
+    <link rel="stylesheet" type="text/css" href="{% static 'Css/details.css' %}">
+    {% if info %}
+        <div style="border: solid white" class="napis">
+            <p>You don't have access to this project!</p>
+        </div>
+    {% else %}
+        <h1 class="project_h1">Rejected requirements for project {{ Name }} </h1>
+        {% if checklist %}
+            <br>
+            <nav>
+                <ul class="navibar_links">
+                    <li><a href="{% url 'tool-rejectlist' project.id 1 %}">V1</a></li>
+                    <li><a href="{% url 'tool-rejectlist' project.id 2 %}">V2</a></li>
+                    <li><a href="{% url 'tool-rejectlist' project.id 3 %}">V3</a></li>
+                    <li><a href="{% url 'tool-rejectlist' project.id 4 %}">V4</a></li>
+                    <li><a href="{% url 'tool-rejectlist' project.id 5 %}">V5</a></li>
+                    <li><a href="{% url 'tool-rejectlist' project.id 6 %}">V6</a></li>
+                    <li><a href="{% url 'tool-rejectlist' project.id 7 %}">V7</a></li>
+                    <li><a href="{% url 'tool-rejectlist' project.id 8 %}">V8</a></li>
+                    <li><a href="{% url 'tool-rejectlist' project.id 9 %}">V9</a></li>
+                    <li><a href="{% url 'tool-rejectlist' project.id 10 %}">V10</a></li>
+                    <li><a href="{% url 'tool-rejectlist' project.id 11 %}">V11</a></li>
+                    <li><a href="{% url 'tool-rejectlist' project.id 12 %}">V12</a></li>
+                    <li><a href="{% url 'tool-rejectlist' project.id 13 %}">V13</a></li>
+                    <li><a href="{% url 'tool-rejectlist' project.id 14 %}">V14</a></li>
+                    <li><a href="{% url 'tool-details' project.id %}">Checklist</a></li>
+                </ul>
+            </nav>
+        {% else %}
+            <div style="border: solid white" class="napis">
+                <p>The checklist has not been generated yet!</p>
+            </div>
+            <div class="generate">
+                <form method="POST">
+                    {% csrf_token %}
+                    <input type="hidden" value="{{ project.id }}" name="id">
+                    <button class="button" type="submit">Generate</button>
+                </form>
+            </div>
+        {% endif %}
+        {% block content_project_rejected %}{% endblock %}
+    {% endif %}
+{% endblock content %}

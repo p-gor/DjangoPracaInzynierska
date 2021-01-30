@@ -1,0 +1,56 @@
+{% extends 'details_rejected.html' %}
+{% load static %}
+{% block content_project_rejected %}
+    <link rel="stylesheet" type="text/css" href="{% static 'Css/add_comment.css' %}">
+    {% if info %}
+        <div class="napis">
+            <p>You don't have access to this project!</p>
+        </div>
+    {% else %}
+        {% if Req.comment %}
+            <div class="napis_com">
+                <p style="color: gold">{{ Req.requirement.requirement_name }}</p>
+            </div>
+            <div class="napis_if">
+                {{ Req.comment }}
+            </div>
+            <div class="content_new_comment">
+                <form method="POST">
+                    <table>
+                        {%  csrf_token %}
+                        {{ form.as_table }}
+                    </table>
+                    <div class="td_add">
+                        <button class="add_button" type="submit">Add comment</button>
+                    </div>
+                </form>
+            </div>
+            <div class="back">
+                <button class="button">
+                    <a class="link_back" href="{% url 'tool-rejectlist' project.id chapter.id %}">Back</a>
+                </button>
+            </div>
+        {% else %}
+            <div class="napis">
+                <p>Add comment to requirement:</p>
+                <p style="color: gold">{{ Req.requirement.requirement_name }}</p>
+            </div>
+            <div class="content_new_comment">
+                <form method="POST">
+                    <table>
+                        {%  csrf_token %}
+                        {{ form.as_table }}
+                    </table>
+                    <div class="td_add">
+                        <button class="add_button" type="submit">Add comment</button>
+                    </div>
+                </form>
+            </div>
+            <div class="back">
+                <button class="button">
+                    <a class="link_back" href="{% url 'tool-rejectlist' project.id chapter.id %}">Back</a>
+                </button>
+            </div>
+        {% endif %}
+    {% endif %}
+{% endblock content_project_rejected %}

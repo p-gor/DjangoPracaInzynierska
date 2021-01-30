@@ -1,15 +1,15 @@
 {% extends 'details_project.html' %}
 {% load static %}
-{% block content_project %}
+{% block content_project_checklist %}
     <link rel="stylesheet" type="text/css" href="{% static 'Css/reject_restore.css' %}">
     {% if info %}
         <div class="napis">
-            <p>Nie masz dostępu do utworzonego projektu!</p>
+            <p>You don't have access to this project!</p>
         </div>
     {% else %}
         {% if if_post == 0 %}
             <div class="napis_final">
-                <p>Pomyślnie odrzucono wymaganie!</p>
+                <p>Successfully rejected the requirement!</p>
             </div>
             <div class="back">
                 <button class="button">
@@ -23,7 +23,7 @@
                 </div>
             {% endif %}
                 <div class="napis_com">
-                    <p> Czy na pewno chcesz odrzucić wymaganie?</p>
+                    <p>Are you sure you want to reject this requirement?</p>
                     <p style="color: gold">{{ Req.requirement.requirement_name }}</p>
                 </div>
                 <div class="l_but">
@@ -41,4 +41,4 @@
                 </div>
             {% endif %}
     {% endif %}
-{% endblock content_project %}
+{% endblock content_project_checklist %}

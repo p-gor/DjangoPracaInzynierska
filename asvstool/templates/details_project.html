@@ -4,10 +4,10 @@
     <link rel="stylesheet" type="text/css" href="{% static 'Css/details.css' %}">
     {% if info %}
         <div style="border: solid white" class="napis">
-            <p>Nie masz dostępu do utworzonego projektu!</p>
+            <p>You don't have access to this project!</p>
         </div>
     {% else %}
-        <h1 class="project_h1">Project name: {{ Name }} </h1>
+        <h1 class="project_h1">Checklist for project: {{ Name }} </h1>
         {% if checklist %}
             <br>
             <nav>
@@ -31,7 +31,7 @@
             </nav>
         {% else %}
             <div style="border: solid white" class="napis">
-                <p>Lista kontrolna nie została jeszcze wygenerowana!</p>
+                <p>The checklist has not been generated yet!</p>
             </div>
             <div class="generate">
                 <form method="POST">
@@ -41,6 +41,6 @@
                 </form>
             </div>
         {% endif %}
-        {% block content_project %}{% endblock %}
+        {% block content_project_checklist %}{% endblock %}
     {% endif %}
 {% endblock content %}

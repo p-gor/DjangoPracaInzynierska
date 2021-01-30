@@ -1,10 +1,10 @@
-{% extends 'details_project.html' %}
+{% extends 'details_rejected.html' %}
 {% load static %}
-{% block content_project %}
+{% block content_project_rejected %}
     <link rel="stylesheet" type="text/css" href="{% static 'Css/checklist.css' %}">
     {% if info %}
         <div class="napis">
-            <p>Nie masz dostępu do utworzonego projektu!</p>
+            <p>You don't have access to this project!</p>
         </div>
     {% else %}
         <div class="scroll">
@@ -15,13 +15,14 @@
             </tr>
             </thead>
             {% for reqs in Obiekty %}
+                {% if reqs.requirement.subsection_nr.chapter_nr.chapter_title == chapter %}
                     <tr>
                         <td class="td_req">
                             <a class="link_req">{{ reqs.requirement.requirement_name }}</a>
                         </td>
                         <td class="td_add_comment">
                             <button class="button">
-                                <a class="link_reject" href="{% url 'tool-add-comment' project.id reqs.id 1 %}">Add comment</a>
+                                <a class="link_reject" href="{% url 'tool-add-comment-rejectlist' project.id reqs.id 1 %}">Add comment</a>
                             </button>
                         </td>
                         <td class="td_reject">
@@ -30,8 +31,9 @@
                             </button>
                         </td>
                     </tr>
+                {% endif %}
             {% endfor %}
         </table>
         </div>
     {% endif %}
-{% endblock content_project %}
+{% endblock content_project_rejected %}

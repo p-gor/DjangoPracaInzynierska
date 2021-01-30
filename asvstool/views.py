@@ -25,12 +25,12 @@ def project(request):
             response = HttpResponse(content_type='text/csv')
             writer = csv.writer(response)
             writer.writerow(['Chapter', 'Subsection', 'Requirement', 'Level 1', 'Level 2', 'Level 3',
-                             'NIST', 'CWE', 'Status'])
+                             'NIST', 'CWE', 'Status', 'Comment'])
             count = ReqsProject.objects.all().filter(project=request.POST.get('id')).count()
             index = ReqsProject.objects.all().filter(project=request.POST.get('id')).first().id
             for i in range(count):
-                req = (ReqsProject.objects.all().filter(
-                    project=request.POST.get('id')).first().requirement.subsection_nr.chapter_nr.chapter_title,
+                req = (ReqsProject.objects.all().filter(project=request.POST.get('id')).get(
+                           id=index + i).requirement.subsection_nr.chapter_nr.chapter_title,
                        ReqsProject.objects.all().filter(project=request.POST.get('id')).get(
                            id=index + i).requirement.subsection_nr.subsection_name,
                        ReqsProject.objects.all().filter(project=request.POST.get('id')).get(
@@ -45,7 +45,8 @@ def project(request):
                            id=index + i).requirement.nist,
                        ReqsProject.objects.all().filter(project=request.POST.get('id')).get(
                            id=index + i).requirement.cwe,
-                       ReqsProject.objects.all().filter(project=request.POST.get('id')).get(id=index + i).status)
+                       ReqsProject.objects.all().filter(project=request.POST.get('id')).get(id=index + i).status,
+                       ReqsProject.objects.all().filter(project=request.POST.get('id')).get(id=index + i).comment)
                 writer.writerow(req)
             response['Content-Disposition'] = 'attachment; filename="Checklist.csv"'
             return response
@@ -57,7 +58,6 @@ def project(request):
         'Obiekty': Project.objects.all().filter(Pentester=request.user).order_by('date_made').reverse(),
         'title': 'Project'
     }
-
     if typ_konta == 0:
         return render(request, 'project.html', context_klient)
     else:
@@ -108,42 +108,101 @@ def details_project(request, id):
         }
         if request.method == 'POST':
             for i in range(count):
+                status = 1
+                if Project.objects.get(id=id).Okresl_poziom_bezpieczenstwa == 0:
+                    if (Requirement.objects.get(id=index + i).lvl3) or (
+                            Requirement.objects.get(id=index + i).lvl2):
+                        status = 0
+                    else:
+                        status = 1
+                elif Project.objects.get(id=id).Okresl_poziom_bezpieczenstwa == 1:
+                    if Requirement.objects.get(id=index + i).lvl3:
+                        status = 0
+                    else:
+                        status = 1
+                else:
+                    if Requirement.objects.get(id=index + i).lvl3:
+                        status = 1
+                # Metoda testowania
+                if Project.objects.get(id=id).Okresl_metode_testowania == 0 and status == 1:
+                    status = 1
+                elif Project.objects.get(id=id).Okresl_metode_testowania == 1 and status == 1:
+                    if Requirement.objects.get(id=index + i).black_box:
+                        status = 1
+                    else:
+                        status = 0
+                elif Project.objects.get(id=id).Okresl_metode_testowania == 2 and status == 1:
+                    if Requirement.objects.get(id=index + i).gray_box:
+                        status = 1
+                    else:
+                        status = 0
+                # Dostęp do dokumentacji
+                if Project.objects.get(id=id).Okresl_dostep_do_dokumentacji == 0 and status == 1:
+                    if Requirement.objects.get(id=index + i).dostep_do_dokumentacji:
+                        status = 0
+                # Dostęp do kodu
+                if Project.objects.get(id=id).Okresl_dostep_do_kodu_zrodlowego == 0 and status == 1:
+                    if Requirement.objects.get(id=index + i).dostep_do_kodu:
+                        status = 0
+                # Dostęp do mechanizmów kryptograficznych
+                if Project.objects.get(id=id).Okresl_dostep_do_mechanizmow_kryptograficznych == 0 and status == 1:
+                    if Requirement.objects.get(id=index + i).dostep_do_mechanizmow_kryptograficznych:
+                        status = 0
+                # Dostęp do dziennika zdarzeń
+                if Project.objects.get(id=id).Okresl_dostep_do_dziennika_zdarzen == 0 and status == 1:
+                    if Requirement.objects.get(id=index + i).dostep_do_dziennika_zdarzen:
+                        status = 0
+                # Możliwość tworzenia kont
+                if Project.objects.get(id=id).Okresl_mozliwosc_tworzenia_kont == 0 and status == 1:
+                    if Requirement.objects.get(id=index + i).tworzenie_kont:
+                        status = 0
+                # Zaimplementowanie mfa
+                if Project.objects.get(id=id).Okresl_zaimplementowanie_mfa == 0 and status == 1:
+                    if Requirement.objects.get(id=index + i).mfa:
+                        status = 0
+                # Wykorzystywanie csp
+                if Project.objects.get(id=id).Okresl_zaimplementowanie_csp == 0 and status == 1:
+                    if Requirement.objects.get(id=index + i).csp:
+                        status = 0
+                # Możliwość wprowadzania danych
+                if Project.objects.get(id=id).Okresl_mozliwosc_wprowadzania_danych == 0 and status == 1:
+                    if Requirement.objects.get(id=index + i).wprowadzanie_danych:
+                        status = 0
+                # Możliwość pobierania/wgrywania plików
+                if Project.objects.get(id=id).Okresl_mozliwosc_dzialania_na_plikach == 0 and status == 1:
+                    if Requirement.objects.get(id=index + i).dzialanie_na_plikach:
+                        status = 0
+                # Mechanizm zarządzania sesją
+                if Project.objects.get(id=id).Okresl_wykorzystywany_mechanizm_zarzadzania_sesja == 0 and status == 1:
+                    if Requirement.objects.get(id=index + i).wykorzystywany_mechanizm_zarzadzania_sesja != 0:
+                        status = 0
+                elif Project.objects.get(id=id).Okresl_wykorzystywany_mechanizm_zarzadzania_sesja == 1 and status == 1:
+                    if Requirement.objects.get(id=index + i).wykorzystywany_mechanizm_zarzadzania_sesja == 2:
+                        status = 0
+                elif Project.objects.get(id=id).Okresl_wykorzystywany_mechanizm_zarzadzania_sesja == 2 and status == 1:
+                    if Requirement.objects.get(id=index + i).wykorzystywany_mechanizm_zarzadzania_sesja == 1:
+                        status = 0
+                # Wykorzystywany kod
+                if Project.objects.get(id=id).Okresl_wykorzystywany_kod == 0 and status == 1:
+                    if Requirement.objects.get(id=index + i).wykorzystywany_kod:
+                        status = 0
+                # Wykorzystywane usługi sieciowe
+                if Project.objects.get(id=id).Okresl_wykorzystywane_uslugi_sieciowe == 0 and status == 1:
+                    if Requirement.objects.get(id=index + i).wykorzystywane_uslugi_sieciowe != 0:
+                        status = 0
+                elif Project.objects.get(id=id).Okresl_wykorzystywane_uslugi_sieciowe == 1 and status == 1:
+                    if Requirement.objects.get(id=index + i).wykorzystywane_uslugi_sieciowe == 2 or Requirement.objects.get(id=index + i).wykorzystywane_uslugi_sieciowe == 3:
+                        status = 0
+                elif Project.objects.get(id=id).Okresl_wykorzystywane_uslugi_sieciowe == 2 and status == 1:
+                    if Requirement.objects.get(id=index + i).wykorzystywane_uslugi_sieciowe == 1 or Requirement.objects.get(id=index + i).wykorzystywane_uslugi_sieciowe == 3:
+                        status = 0
+                elif Project.objects.get(id=id).Okresl_wykorzystywane_uslugi_sieciowe == 3 and status == 1:
+                    if Requirement.objects.get(id=index + i).wykorzystywane_uslugi_sieciowe == 1 or Requirement.objects.get(id=index + i).wykorzystywane_uslugi_sieciowe == 2:
+                        status = 0
                 object = ReqsProject(project=Project.objects.get(id=id),
                                      requirement=Requirement.objects.get(id=index + i),
+                                     status=status,
                                      comment="")
-                object.save()
-            count_object = ReqsProject.objects.all().filter(project=id).count()
-            index = ReqsProject.objects.all().filter(project=id).first().id
-            for i in range(count_object):
-                object = ReqsProject.objects.all().filter(project=id).get(id=index + i)
-                # Poziom bezpieczenstwa
-                if Project.objects.get(id=id).Okresl_poziom_bezpieczenstwa == 0:
-                    if (ReqsProject.objects.all().filter(project=id).get(id=index + i).requirement.lvl3) or (
-                            ReqsProject.objects.all().filter(project=id).get(id=index + i).requirement.lvl2):
-                        object.status = 0
-                    else:
-                        object.status = 1
-                elif Project.objects.get(id=id).Okresl_poziom_bezpieczenstwa == 1:
-                    if ReqsProject.objects.all().filter(project=id).get(id=index + i).requirement.lvl3:
-                        object.status = 0
-                    else:
-                        object.status = 1
-                else:
-                    if ReqsProject.objects.all().filter(project=id).get(id=index + i).requirement.lvl3:
-                        object.status = 1
-                # Metoda testowania
-                if Project.objects.get(id=id).Okresl_metode_testowania == 0 and object.status == 1:
-                    object.status = 1
-                elif Project.objects.get(id=id).Okresl_metode_testowania == 1 and object.status == 1:
-                    if ReqsProject.objects.all().filter(project=id).get(id=index + i).requirement.black_box:
-                        object.status = 1
-                    else:
-                        object.status = 0
-                elif Project.objects.get(id=id).Okresl_metode_testowania == 2 and object.status == 1:
-                    if ReqsProject.objects.all().filter(project=id).get(id=index + i).requirement.gray_box:
-                        object.status = 1
-                    else:
-                        object.status = 0
                 object.save()
             return render(request, 'details_project.html', context)
         else:
@@ -174,16 +233,16 @@ def checklist(request, id, id_state):
     else:
         context = {
             'info': 'Nie masz dostępu do tego projektu',
-            'title': 'checklist'
+            'title': 'Checklist'
         }
         return render(request, 'checklist.html', context)
 
 
 @login_required
-def rejected(request, id):
+def rejectlist(request, id, id_state):
     email = Account.objects.get(username=request.user.username)
     if (Project.objects.get(id=id).klient == email) or (Project.objects.get(id=id).Pentester == email):
-        chapter = 'Rejected requirements'
+        chapter = Chapter.objects.get(id=id_state).chapter_title
         Obiekty = ReqsProject.objects.all().filter(project=id).filter(status=0)
         context = {
             'Name': Project.objects.get(id=id).project_name,
@@ -191,15 +250,34 @@ def rejected(request, id):
             'chapter': chapter,
             'Obiekty': Obiekty.order_by('id'),
             'checklist': ReqsProject.objects.all().filter(project=id),
-            'title': 'Rejected Requirements'
+            'title': 'Reject list'
         }
         return render(request, 'rejected.html', context)
     else:
         context = {
             'info': 'Nie masz dostępu do tego projektu',
-            'title': 'Rejected Requirements'
+            'title': 'Reject list'
         }
         return render(request, 'rejected.html', context)
+
+
+@login_required
+def rejected(request, id):
+    email = Account.objects.get(username=request.user.username)
+    if (Project.objects.get(id=id).klient == email) or (Project.objects.get(id=id).Pentester == email):
+        context = {
+            'Name': Project.objects.get(id=id).project_name,
+            'project': Project.objects.get(id=id),
+            'checklist': ReqsProject.objects.all().filter(project=id),
+            'title': 'Rejected Requirements'
+        }
+        return render(request, 'details_rejected.html', context)
+    else:
+        context = {
+            'info': 'Nie masz dostępu do tego projektu',
+            'title': 'Rejected Requirements'
+        }
+        return render(request, 'details_rejected.html', context)
 
 
 @login_required
@@ -218,10 +296,12 @@ def add_comment(request, id_project, id_requirement, pk):
                 'title': 'Add Comment',
                 'chapter': ReqsProject.objects.get(id=id_requirement).requirement.subsection_nr.chapter_nr,
                 'checklist': ReqsProject.objects.all().filter(project=id_project),
-                'if_checklist': pk,
                 'form': form,
             }
-            return render(request, 'add_comment.html', context)
+            if pk == 0:
+                return render(request, 'add_comment_checklist.html', context)
+            else:
+                return render(request, 'add_comment_rejected.html', context)
         else:
             form = AddComment()
             context = {
@@ -230,17 +310,22 @@ def add_comment(request, id_project, id_requirement, pk):
                 'Req': ReqsProject.objects.get(id=id_requirement),
                 'chapter': ReqsProject.objects.get(id=id_requirement).requirement.subsection_nr.chapter_nr,
                 'title': 'Add Comment',
-                'if_checklist': pk,
                 'checklist': ReqsProject.objects.all().filter(project=id_project),
                 'form': form,
             }
-            return render(request, 'add_comment.html', context)
+            if pk == 0:
+                return render(request, 'add_comment_checklist.html', context)
+            else:
+                return render(request, 'add_comment_rejected.html', context)
     else:
         context = {
             'info': 'Nie masz dostępu do tego projektu',
             'title': 'Add Comment'
         }
-        return render(request, 'add_comment.html', context)
+        if pk == 0:
+            return render(request, 'add_comment_checklist.html', context)
+        else:
+            return render(request, 'add_comment_rejected.html', context)
 
 
 @login_required

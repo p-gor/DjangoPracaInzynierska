@@ -1,19 +1,19 @@
-{% extends 'details_project.html' %}
+{% extends 'details_rejected.html' %}
 {% load static %}
-{% block content_project %}
+{% block content_project_rejected %}
     <link rel="stylesheet" type="text/css" href="{% static 'Css/reject_restore.css' %}">
     {% if info %}
         <div class="napis">
-            <p>Nie masz dostępu do utworzonego projektu!</p>
+            <p>You don't have access to this project!</p>
         </div>
     {% else %}
         {% if if_post == 0 %}
             <div class="napis_final">
-                <p>Pomyślnie przywrócono wymaganie!</p>
+                <p>Successfully restored the requirement!</p>
             </div>
             <div class="back">
                 <button class="button">
-                    <a class="link_reject" href="{% url 'tool-rejected' project.id %}">Back</a>
+                    <a class="link_reject" href="{% url 'tool-rejectlist' project.id chapter.id %}">Back</a>
                 </button>
             </div>
         {% else %}
@@ -23,7 +23,7 @@
                 </div>
             {% endif %}
                 <div class="napis_com">
-                    <p> Czy na pewno chcesz przywrócić wymaganie?</p>
+                    <p>Are you sure you want to restore this requirement?</p>
                     <p style="color: gold">{{ Req.requirement.requirement_name }}</p>
                 </div>
                 <div class="l_but">
@@ -36,9 +36,9 @@
                 </div>
                 <div class="r_but">
                     <button class="button">
-                            <a class="link_reject" href="{% url 'tool-rejected' project.id %}">No</a>
+                            <a class="link_reject" href="{% url 'tool-rejectlist' project.id chapter.id %}">No</a>
                     </button>
                 </div>
             {% endif %}
     {% endif %}
-{% endblock content_project %}
+{% endblock content_project_rejected %}
