@@ -80,7 +80,7 @@ uslugi_sieciowe = (
 
 class AddProject(forms.ModelForm):
     project_name = forms.CharField(max_length=256, required=True,
-                               widget=forms.TextInput(attrs={'class': 'pr', 'title': 'Project name'}))
+                               widget=forms.TextInput(attrs={'class': 'pr', 'title': 'Nazwa projektu'}))
     Pentester = forms.ModelChoiceField(queryset=Account.objects.all().filter(type_account=1, is_admin=False))
     Okresl_poziom_bezpieczenstwa = forms.ChoiceField(choices=poziom)
     Okresl_metode_testowania = forms.ChoiceField(choices=metoda)

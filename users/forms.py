@@ -7,17 +7,18 @@ from .models import Profile, Account
 
 class UserRegisterForm(UserCreationForm):
     username = forms.CharField(max_length=40, required=True,
-                               widget=forms.TextInput(attrs={'class': 'pr', 'title': 'Username'}))
+                               widget=forms.TextInput(attrs={'class': 'pr', 'title': 'Nazwa użytkownika'}))
     email = forms.EmailField(max_length=60, required=True,
                              widget=forms.TextInput(attrs={'class': 'pr', 'title': 'Email'}))
     first_name = forms.CharField(max_length=30, required=True,
-                                 widget=forms.TextInput(attrs={'class': 'pr', 'title': 'First name'}))
+                                 widget=forms.TextInput(attrs={'class': 'pr', 'title': 'Imię'}))
     last_name = forms.CharField(max_length=30, required=True,
-                                widget=forms.TextInput(attrs={'class': 'pr', 'title': 'Last name'}))
+                                widget=forms.TextInput(attrs={'class': 'pr', 'title': 'Nazwisko'}))
     password1 = forms.CharField(required=True, widget=forms.PasswordInput(
-        attrs={'class': 'pr', 'title': 'Password'}))
+        attrs={'class': 'pr', 'title': 'Hasło powinno: zawierać minimum 8 znaków, nie może składać się z samych cyfr,'
+                                       'nie może być powszechnie znane, nie może zawirerać informacji personalnych'}))
     password2 = forms.CharField(required=True, widget=forms.PasswordInput(
-        attrs={'class': 'pr', 'title': 'Confirm password'}))
+        attrs={'class': 'pr', 'title': 'Potwierdź hasło'}))
 
     class Meta:
         model = Account
@@ -43,18 +44,18 @@ class UserLoginForm(AuthenticationForm):
     username = forms.CharField(widget=forms.TextInput(
         attrs={'class': 'pr', 'title': 'Login'}))
     password = forms.CharField(widget=forms.PasswordInput(
-        attrs={'class': 'pr', 'title': 'Password'}))
+        attrs={'class': 'pr', 'title': 'Hasło'}))
 
 
 class UserUpdateForm(forms.ModelForm):
     username = forms.CharField(max_length=40, required=True,
-                               widget=forms.TextInput(attrs={'class': 'pr', 'title': 'Username'}))
+                               widget=forms.TextInput(attrs={'class': 'pr', 'title': 'Nazwa użytkownika'}))
     email = forms.EmailField(max_length=60, required=True,
                              widget=forms.TextInput(attrs={'class': 'pr', 'title': 'Email'}))
     first_name = forms.CharField(max_length=30, required=True,
-                                 widget=forms.TextInput(attrs={'class': 'pr', 'title': 'First name'}))
+                                 widget=forms.TextInput(attrs={'class': 'pr', 'title': 'Imię'}))
     last_name = forms.CharField(max_length=30, required=True,
-                                widget=forms.TextInput(attrs={'class': 'pr', 'title': 'Last name'}))
+                                widget=forms.TextInput(attrs={'class': 'pr', 'title': 'Nazwisko'}))
 
     class Meta:
         model = Account
