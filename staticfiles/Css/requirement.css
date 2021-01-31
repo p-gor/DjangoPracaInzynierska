@@ -1,0 +1,124 @@
+    .app-text{
+        text-align: center;
+    }
+
+    .app-text h1{
+        margin: 3vh auto 0 auto;
+        font-size: 50px;
+        position: relative;
+        color: white;
+        text-align: center;
+    }
+
+    .content {
+        width: 80%;
+        margin: 3vh auto 0 auto;
+    }
+
+    .content_req {
+        width: 80%;
+        margin: 3vh auto 0 auto;
+        overflow: hidden;
+        overflow-y:scroll;
+        height: auto;
+        max-height: 65vh;
+    }
+
+    .test_req{
+        width: 100%;
+    }
+
+    .cal
+    {
+        border-collapse: separate;
+        width:100%;
+        border-spacing:3px;
+    }
+    .ops
+    {
+        text-align: center;
+        height: 5vh;
+        color: #b2b1b1;
+        background-color: #42455a;
+        font-size: 4vh;
+        border-radius: 60px;
+        border: solid white;
+    }
+
+    .ops_req
+    {
+        text-align: center;
+        height: 5vh;
+        color: #b2b1b1;
+        background-color: #42455a;
+        font-size: 4vh;
+        border-radius: 10px;
+        border: solid white;
+    }
+
+    .link{
+        padding-left: 2vh;
+        text-decoration: none;
+        font-size: 3vh;
+        color: white;
+        left: auto;
+    }
+
+    .req{
+        padding-left: 2vh;
+        text-decoration: none;
+        font-size: 2.5vh;
+        color: white;
+        left: auto;
+    }
+
+    .th_req{
+        border: solid #b2b1b1;
+        background-color: #8288AE;
+    }
+
+    .td_req{
+        background-color: #8288AE;
+        border: solid white;
+        border-radius: 10px;
+        color: white;
+    }
+
+    .td_about{
+        background-color: #8288AE;
+        border: solid white;
+        color: white;
+        border-radius: 60px;
+    }
+
+    .back{
+        margin: 1.5vh auto 0 auto;
+        width: 3.7%;
+    }
+
+    .button{
+        padding:15px;
+        border-radius: 20px;
+        border: solid white;
+        outline: none;
+        cursor: pointer;
+        background-color: #8288AE;
+        margin: 1% 0;
+    }
+
+    .link_back{
+        text-decoration: none;
+        color: white;
+        font-size: 15px;
+    }
+
+    .napis{
+        font-size: 30px;
+        margin: 3vh auto 0 auto;
+        text-align: center;
+        background: #42455a;
+        color: #b2b1b1;
+        border-radius: 60px;
+        border: solid white;
+        width: 80vh;
+    }

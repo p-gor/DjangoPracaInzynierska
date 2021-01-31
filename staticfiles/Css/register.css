@@ -1,0 +1,55 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+.content_register{
+    width: 55vh;
+    box-shadow: 0 0 3px 0 rgba(0,0,0,0);
+    padding: 2vh;
+    margin: 7vh auto 0 auto;
+    text-align: center;
+    background-color: #42455a;
+    border-radius: 60px;
+    color: #b2b1b1;
+    border: solid white;
+}
+
+.content_register h1{
+    color: white;
+    margin-bottom: 30px;
+    }
+
+.sign_button{
+    width: 30%;
+    padding: 10px;
+    border-radius: 20px;
+    border: solid white;
+    font-size: 15px;
+    margin: 1% 0;
+    outline: none;
+    cursor: pointer;
+    color: white;
+    background: #8288AE;
+}
+
+.sign_l{
+    color: lightskyblue;
+    text-decoration: none;
+}
+
+.form_div{
+    text-align: center;
+    padding: 3vh;
+    font-size: 20px;
+}
+
+.pr{
+    background-color: #8288AE;
+    margin-left: 8vh;
+    padding: 5px;
+    font-size: small;
+    color: white;
+    border: solid white;
+    border-radius: 60px;
+}

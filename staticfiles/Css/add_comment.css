@@ -1,0 +1,89 @@
+    .napis{
+        font-size: 30px;
+        margin: 3vh auto 0 auto;
+        text-align: center;
+        background: #42455a;
+        color: #b2b1b1;
+        border-radius: 60px;
+        border: solid white;
+        width: 120vh;
+    }
+
+    .napis_com{
+        font-size: 30px;
+        margin: 3vh auto 0 auto;
+        text-align: center;
+        background: #42455a;
+        color: #b2b1b1;
+        border-radius: 40px;
+        border: solid white;
+        width: 120vh;
+    }
+
+    .napis_if{
+        font-size: 25px;
+        margin: 3vh auto 0 auto;
+        text-align: left;
+        background: #8288AE;
+        color: white;
+        border: solid white;
+        width: 120vh;
+    }
+
+    .back{
+        margin: 3vh auto 0 auto;
+        width: 3.7%;
+    }
+
+    .add_comment_button{
+        padding:15px;
+        border-radius: 20px;
+        border: solid white;
+        outline: none;
+        cursor: pointer;
+        background-color: #42455a;
+        color: #b2b1b1;
+        margin: 1% 0;
+    }
+
+    .special{
+        width: 367%;
+        height: 5vh;
+        font-size: 20px;
+        background-color: white;
+        margin-left: 1vh;
+        padding: 5px;
+        color: black;
+    }
+
+    .content_new_comment{
+        font-size: 25px;
+        margin: 3vh auto 0 auto;
+        text-align: center;
+        color: white;
+        width: 120vh;
+    }
+
+    .add_button{
+        padding: 10px;
+        border-radius: 20px;
+        border: solid white;
+        font-size: 20px;
+        margin: 1% 0;
+        outline: none;
+        cursor: pointer;
+        color: #b2b1b1;
+        background-color: #42455a;
+    }
+
+    .td_add{
+        margin-top: 1vh;
+        width: 13.5%;
+    }
+
+    .link_back{
+        text-decoration: none;
+        color: white;
+        font-size: 20px;
+    }
+

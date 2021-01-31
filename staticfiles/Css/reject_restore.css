@@ -1,0 +1,79 @@
+.napis{
+        font-size: 30px;
+        margin: 3vh auto 0 auto;
+        text-align: center;
+        background: #42455a;
+        color: #b2b1b1;
+        border-radius: 60px;
+        border: solid white;
+        width: 120vh;
+}
+.napis_final{
+        font-size: 30px;
+        margin: 3vh auto 0 auto;
+        text-align: center;
+        background: #42455a;
+        color: #b2b1b1;
+        border-radius: 60px;
+        border: solid white;
+        width: 60vh;
+}
+
+.napis_if{
+        font-size: 25px;
+        margin: 3vh auto 0 auto;
+        text-align: left;
+        background: #8288AE;
+        color: white;
+        border: solid white;
+        width: 120vh;
+}
+
+.napis_com{
+        font-size: 30px;
+        margin: 3vh auto 0 auto;
+        text-align: center;
+        background: #42455a;
+        color: #b2b1b1;
+        border-radius: 40px;
+        border: solid white;
+        width: 120vh;
+    }
+
+.back{
+        margin: 0 auto 0 auto;
+        width: 3.7%;
+}
+
+.l_but{
+        margin: 3vh auto 0 auto;
+        float: left;
+        width: 49%;
+        text-align: right;
+}
+.r_but{
+        margin: 3vh auto 0 auto;
+        float: right;
+        width: 49%;
+}
+
+.button{
+        padding:15px;
+        border-radius: 20px;
+        border: solid white;
+        outline: none;
+        cursor: pointer;
+        background-color: #8288AE;
+        margin: 1% 0;
+}
+
+.link_reject{
+        text-decoration: none;
+        color: white;
+        font-size: 20px;
+}
+
+.back{
+        margin: 3vh auto 0 auto;
+        width: 3.7%;
+}
