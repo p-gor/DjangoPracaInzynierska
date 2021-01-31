@@ -1,5 +1,7 @@
 from django.urls import path, include
 from . import views
+from django.conf.urls.static import static
+from DjangoPracaInzynierska import settings
 
 urlpatterns = [
     path('', views.home, name='tool-home'),
@@ -22,4 +24,4 @@ urlpatterns = [
          name='tool-restore'),
     path('subsection/<int:pk>', views.subsection, name='tool-subsection'),
     path('tests/<int:pk>', views.tests, name='tool-test'),
-]
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
