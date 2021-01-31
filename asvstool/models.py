@@ -78,7 +78,7 @@ class Requirement(models.Model):
 class Project(models.Model):
     project_name = models.CharField(max_length=256, default=None)
     date_made = models.DateTimeField(verbose_name="data utworzenia", auto_now_add=True)
-    klient = models.ForeignKey(Account, blank=True, null=True, default=None, on_delete=models.CASCADE,
+    Klient = models.ForeignKey(Account, blank=True, null=True, default=None, on_delete=models.CASCADE,
                                db_column='email', related_name='+')
     Pentester = models.ForeignKey(Account, blank=True, null=True, default=None, on_delete=models.CASCADE,
                                   db_column='username', related_name='+')
@@ -135,7 +135,7 @@ class Project(models.Model):
         return self.project_name
 
     class Meta:
-        unique_together = [['project_name', 'klient']]
+        unique_together = [['project_name', 'Klient']]
 
 
 class ReqsProject(models.Model):

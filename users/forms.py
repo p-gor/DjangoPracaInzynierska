@@ -16,7 +16,7 @@ class UserRegisterForm(UserCreationForm):
                                 widget=forms.TextInput(attrs={'class': 'pr', 'title': 'Nazwisko'}))
     password1 = forms.CharField(required=True, widget=forms.PasswordInput(
         attrs={'class': 'pr', 'title': 'Hasło powinno: zawierać minimum 8 znaków, nie może składać się z samych cyfr,'
-                                       'nie może być powszechnie znane, nie może zawirerać informacji personalnych'}))
+                                       'nie może być powszechnie znane, nie może zawierać informacji personalnych'}))
     password2 = forms.CharField(required=True, widget=forms.PasswordInput(
         attrs={'class': 'pr', 'title': 'Potwierdź hasło'}))
 

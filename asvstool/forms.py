@@ -45,8 +45,8 @@ uwierzytelnianie_mfa = (
 )
 
 uwierzytelnianie_csp = (
-    (0, "Brak wdrożenia uwierzytelniania z wykorzystaniem csp"),
-    (1, "Wdrożona możliwość uwierzytelniania z wykorzystaniem csp"),
+    (0, "Brak wdrożenia uwierzytelniania z wykorzystaniem CSP"),
+    (1, "Wdrożona możliwość uwierzytelniania z wykorzystaniem CSP"),
 )
 
 wprowadzanie_danych_do_aplikacji = (
