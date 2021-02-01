@@ -81,10 +81,10 @@ def add_project(request):
                         form = AddProject()
                         context = {
                             'info': 'Projekt o podanej nazwie został już utworzony! Prosze podac inną nazwę projektu',
+                            'title': 'Nowy Projekt',
                             'form': form
                         }
                         return render(request, 'add_project.html', context)
-                # form_tmp.requirements = Requirement.objects.all()
                 form_tmp.save()
                 return redirect('tool-project')
         else:
