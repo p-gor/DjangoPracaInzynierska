@@ -12,6 +12,9 @@ def register(request):
         if form.is_valid():
             form.save()
             return redirect('login')
+        else:
+            form = UserRegisterForm()
+            return render(request, 'register.html', {'title': 'Register', 'form': form, 'napis': 'niepoprawne dane'})
     else:
         form = UserRegisterForm()
     return render(request, 'register.html', {'title': 'Register', 'form': form})
