@@ -3,7 +3,7 @@
 {% block content %}
     <link rel="stylesheet" type="text/css" href="{% static 'Css/register.css' %}">
     <div class="content_register">
-        <h1>Dołącz do ASVS Tool!</h1>
+        <h1>Dołącz do ASVS-Tool!</h1>
         <form method="POST">
             {% csrf_token %}
             <div class="form_div">
@@ -120,7 +120,7 @@
             <br>
         </form>
         <div>
-            Posiadasz konto w ASVS Tool? <a class="sign_l" href="{% url 'login' %}">Zaloguj się</a>
+            Posiadasz konto w ASVS-Tool? <a class="sign_l" href="{% url 'login' %}">Zaloguj się</a>
         </div>
     </div>
 {% endblock content %}
