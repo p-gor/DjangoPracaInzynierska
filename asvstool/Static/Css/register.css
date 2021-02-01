@@ -17,7 +17,7 @@
 
 .content_register h1{
     color: white;
-    margin-bottom: 30px;
+    margin-bottom: 10px;
     }
 
 .sign_button{
@@ -54,13 +54,8 @@
     border-radius: 60px;
 }
 
-.napis{
-        font-size: 30px;
-        margin: 3vh auto 0 auto;
-        text-align: center;
-        background: #42455a;
-        color: #b2b1b1;
-        border-radius: 60px;
-        border: solid white;
-        width: 80vh;
-    }
+.error{
+    font-size: 15px;
+    color: red; margin-left: 5vh;
+    text-align: left
+}
