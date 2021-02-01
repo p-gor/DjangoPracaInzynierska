@@ -16,42 +16,46 @@ def home(request):
 @login_required
 def project(request):
     typ_konta = Account.objects.get(username=request.user.username).type_account
+    wymagania = ReqsProject.objects.all().filter(project=request.POST.get('id'))
     if typ_konta == 0:
         if request.method == "POST":
             obiekt = Project.objects.get(id=request.POST.get('id'))
             obiekt.delete()
     else:
         if request.method == "POST":
-            response = HttpResponse(content_type='text/csv')
-            writer = csv.writer(response)
-            writer.writerow(['Chapter', 'Subsection', 'Requirement', 'Level 1', 'Level 2', 'Level 3',
-                             'NIST', 'CWE', 'Status', 'Comment'])
-            count = ReqsProject.objects.all().filter(project=request.POST.get('id')).count()
-            index = ReqsProject.objects.all().filter(project=request.POST.get('id')).first().id
-            for i in range(count):
-                req = (ReqsProject.objects.all().filter(project=request.POST.get('id')).get(
-                           id=index + i).requirement.subsection_nr.chapter_nr.chapter_title,
-                       ReqsProject.objects.all().filter(project=request.POST.get('id')).get(
-                           id=index + i).requirement.subsection_nr.subsection_name,
-                       ReqsProject.objects.all().filter(project=request.POST.get('id')).get(
-                           id=index + i).requirement.requirement_name,
-                       ReqsProject.objects.all().filter(project=request.POST.get('id')).get(
-                           id=index + i).requirement.lvl1,
-                       ReqsProject.objects.all().filter(project=request.POST.get('id')).get(
-                           id=index + i).requirement.lvl2,
-                       ReqsProject.objects.all().filter(project=request.POST.get('id')).get(
-                           id=index + i).requirement.lvl3,
-                       ReqsProject.objects.all().filter(project=request.POST.get('id')).get(
-                           id=index + i).requirement.nist,
-                       ReqsProject.objects.all().filter(project=request.POST.get('id')).get(
-                           id=index + i).requirement.cwe,
-                       ReqsProject.objects.all().filter(project=request.POST.get('id')).get(id=index + i).status,
-                       ReqsProject.objects.all().filter(project=request.POST.get('id')).get(id=index + i).comment)
-                writer.writerow(req)
-            response['Content-Disposition'] = 'attachment; filename="Checklist.csv"'
-            return response
+            if wymagania:
+                response = HttpResponse(content_type='text/csv')
+                writer = csv.writer(response)
+                writer.writerow(['Chapter', 'Subsection', 'Requirement', 'Level 1', 'Level 2', 'Level 3',
+                                 'NIST', 'CWE', 'Status', 'Comment'])
+                count = ReqsProject.objects.all().filter(project=request.POST.get('id')).count()
+                index = ReqsProject.objects.all().filter(project=request.POST.get('id')).first().id
+                for i in range(count):
+                    req = (wymagania.get(
+                               id=index + i).requirement.subsection_nr.chapter_nr.chapter_title,
+                           wymagania.get(
+                               id=index + i).requirement.subsection_nr.subsection_name,
+                           wymagania.get(
+                               id=index + i).requirement.requirement_name,
+                           wymagania.get(
+                               id=index + i).requirement.lvl1,
+                           wymagania.get(
+                               id=index + i).requirement.lvl2,
+                           wymagania.get(
+                               id=index + i).requirement.lvl3,
+                           wymagania.get(
+                               id=index + i).requirement.nist,
+                           wymagania.get(
+                               id=index + i).requirement.cwe,
+                           wymagania.get(id=index + i).status,
+                           wymagania.get(id=index + i).comment)
+                    writer.writerow(req)
+                response['Content-Disposition'] = 'attachment; filename="Checklist.csv"'
+                return response
+            else:
+                return redirect('tool-details', request.POST.get('id'))
     context_klient = {
-        'Obiekty': Project.objects.all().filter(klient=request.user).order_by('date_made').reverse(),
+        'Obiekty': Project.objects.all().filter(Klient=request.user).order_by('date_made').reverse(),
         'title': 'Projekty',
     }
     context_pentester = {
@@ -74,10 +78,10 @@ def add_project(request):
                 # przypisanie aktualnego użytkownika jako tworce danego projektu,
                 # wykorzystano do tego pomocniczą zmienną form_tmp
                 form_tmp = form.save(commit=False)
-                form_tmp.klient = request.user
+                form_tmp.Klient = request.user
                 Obiekty = Project.objects.all()
                 for obiekt in Obiekty:
-                    if (form_tmp.klient == obiekt.klient) and (form_tmp.project_name == obiekt.project_name):
+                    if (form_tmp.Klient == obiekt.Klient) and (form_tmp.project_name == obiekt.project_name):
                         form = AddProject()
                         context = {
                             'info': 'Projekt o podanej nazwie został już utworzony! Prosze podac inną nazwę projektu',
@@ -97,7 +101,7 @@ def add_project(request):
 @login_required
 def details_project(request, id):
     email = Account.objects.get(username=request.user.username)
-    if (Project.objects.get(id=id).klient == email) or (Project.objects.get(id=id).Pentester == email):
+    if (Project.objects.get(id=id).Klient == email) or (Project.objects.get(id=id).Pentester == email):
         count = Requirement.objects.all().count()
         index = Requirement.objects.all().first().id
         context = {
@@ -218,7 +222,7 @@ def details_project(request, id):
 @login_required
 def checklist(request, id, id_state):
     email = Account.objects.get(username=request.user.username)
-    if (Project.objects.get(id=id).klient == email) or (Project.objects.get(id=id).Pentester == email):
+    if (Project.objects.get(id=id).Klient == email) or (Project.objects.get(id=id).Pentester == email):
         chapter = Chapter.objects.get(id=id_state).chapter_title
         Obiekty = ReqsProject.objects.all().filter(project=id).filter(status=1)
         context = {
@@ -241,7 +245,7 @@ def checklist(request, id, id_state):
 @login_required
 def rejectlist(request, id, id_state):
     email = Account.objects.get(username=request.user.username)
-    if (Project.objects.get(id=id).klient == email) or (Project.objects.get(id=id).Pentester == email):
+    if (Project.objects.get(id=id).Klient == email) or (Project.objects.get(id=id).Pentester == email):
         chapter = Chapter.objects.get(id=id_state).chapter_title
         Obiekty = ReqsProject.objects.all().filter(project=id).filter(status=0)
         context = {
@@ -264,7 +268,7 @@ def rejectlist(request, id, id_state):
 @login_required
 def rejected(request, id):
     email = Account.objects.get(username=request.user.username)
-    if (Project.objects.get(id=id).klient == email) or (Project.objects.get(id=id).Pentester == email):
+    if (Project.objects.get(id=id).Klient == email) or (Project.objects.get(id=id).Pentester == email):
         context = {
             'Name': Project.objects.get(id=id).project_name,
             'project': Project.objects.get(id=id),
@@ -283,7 +287,7 @@ def rejected(request, id):
 @login_required
 def add_comment(request, id_project, id_requirement, pk):
     email = Account.objects.get(username=request.user.username)
-    if (Project.objects.get(id=id_project).klient == email) or (Project.objects.get(id=id_project).Pentester == email):
+    if (Project.objects.get(id=id_project).Klient == email) or (Project.objects.get(id=id_project).Pentester == email):
         if request.method == 'POST':
             form_tmp = ReqsProject.objects.get(id=id_requirement)
             form_tmp.comment = request.POST['comment']
@@ -339,7 +343,7 @@ def reject(request, id_project, id_requirement):
         'chapter': ReqsProject.objects.get(id=id_requirement).requirement.subsection_nr.chapter_nr,
         'checklist': ReqsProject.objects.all().filter(project=id_project),
     }
-    if (Project.objects.get(id=id_project).klient == email) or (Project.objects.get(id=id_project).Pentester == email):
+    if (Project.objects.get(id=id_project).Klient == email) or (Project.objects.get(id=id_project).Pentester == email):
         if request.method == 'POST':
             form_tmp = ReqsProject.objects.get(id=id_requirement)
             form_tmp.status = 0
@@ -375,7 +379,7 @@ def restore(request, id_project, id_requirement):
         'chapter': ReqsProject.objects.get(id=id_requirement).requirement.subsection_nr.chapter_nr,
         'checklist': ReqsProject.objects.all().filter(project=id_project),
     }
-    if (Project.objects.get(id=id_project).klient == email) or (Project.objects.get(id=id_project).Pentester == email):
+    if (Project.objects.get(id=id_project).Klient == email) or (Project.objects.get(id=id_project).Pentester == email):
         if request.method == 'POST':
             form_tmp = ReqsProject.objects.get(id=id_requirement)
             form_tmp.status = 1

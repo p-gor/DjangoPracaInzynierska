@@ -27,12 +27,31 @@
         border-spacing:3px;
     }
 
+    .ops{
+        text-align: center;
+        height: 5vh;
+        color: #b2b1b1;
+        background-color: #42455a;
+        font-size: 4vh;
+        border-radius: 60px;
+        border: solid white;
+    }
+
     .td_project{
         background-color: #8288AE;
         border: solid white;
         color: white;
         text-align: center;
         border-radius: 60px;
+    }
+
+    .td_project_klient{
+        background-color: #8288AE;
+        border: solid white;
+        color: white;
+        text-align: center;
+        border-radius: 60px;
+        width: 33vh;
     }
 
     .td_delete{

@@ -8,12 +8,20 @@
     {% if Obiekty %}
     <div class="scroll">
         <table class="cal">
+            {% if user.type_account == 1 %}
+                <thead>
+                    <tr>
+                        <th class="ops">Klient</th>
+                        <th class="ops">Nazwa projektu</th>
+                    </tr>
+                </thead>
+            {% endif %}
             {% for project in Obiekty %}
-                <tr>
-                    <td class="td_project">
-                        <a class="link" href="{% url 'tool-details' project.id %}">{{ project.project_name }}</a><br>
-                    </td>
-                    {% if user.type_account == 0 %}
+                {% if user.type_account == 0 %}
+                    <tr>
+                        <td class="td_project">
+                            <a class="link" href="{% url 'tool-details' project.id %}">{{ project.project_name }}</a><br>
+                        </td>
                         <td class="td_delete">
                             <form method="POST">
                                 {% csrf_token %}
@@ -21,16 +29,24 @@
                                 <button class="button" type="submit">Usuń</button>
                             </form>
                         </td>
-                    {% else %}
-                        <td class="td_download">
-                            <form method="POST">
-                                {% csrf_token %}
-                                <input type="hidden" value="{{ project.id }}" name="id">
-                                <button class="button" type="submit">Pobierz</button>
-                            </form>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td class="td_project_klient">
+                            <p class="link">{{ project.Klient.first_name }} {{ project.Klient.last_name }}</p>
                         </td>
+                        <td class="td_project">
+                            <a class="link" href="{% url 'tool-details' project.id %}">{{ project.project_name }}</a>
+                        </td>
+                        <td class="td_download">
+                                <form method="POST">
+                                    {% csrf_token %}
+                                    <input type="hidden" value="{{ project.id }}" name="id">
+                                    <button class="button" type="submit">Pobierz</button>
+                                </form>
+                        </td>
+                    </tr>
                     {% endif %}
-                </tr>
             {% endfor %}
         </table>
     </div>
