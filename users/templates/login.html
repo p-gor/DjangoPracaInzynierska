@@ -9,6 +9,11 @@
             <div class="form_div">
                 <table>
                     <tbody>
+                        {% if form.non_field_errors %}
+                             <div class="error">
+                                 {{ form.non_field_errors }}
+                             </div>
+                         {% endif %}
                         <tr>
                             <th>
                                 <div style="margin-bottom: 10px">
