@@ -2,193 +2,137 @@
 {% load static %}
 {% block content %}
     <link rel="stylesheet" type="text/css" href="{% static 'Css/register.css' %}">
-    {% if napis %}
-        <div class="napis">
-            <p>Wprowadzono niepoprawne dane!</p>
-            <p>Spróbuj ponownie!</p>
-        </div>
-        <div class="content_register">
-            <h1>Dołącz do ASVS Tool!</h1>
-            <form method="POST">
-                {% csrf_token %}
-                <div class="form_div">
-                    <table>
-                        <tbody>
+    <div class="content_register">
+        <h1>Dołącz do ASVS Tool!</h1>
+        <form method="POST">
+            {% csrf_token %}
+            <div class="form_div">
+                <table>
+                    <tbody>
+                     {% if form.username.errors %}
                             <tr>
-                                <th>
-                                    <div style="margin-bottom: 10px">
-                                        Nazwa użytkownika
-                                    </div>
-                                </th>
-                                <td>
-                                    <div style="margin-bottom: 10px">
-                                        {{ form.username }}
-                                    </div>
-                                </td>
+                                <div style="font-size: 15px; color: red; margin-left: 5vh; text-align: left">
+                                    {{ form.username.errors }}
+                                </div>
                             </tr>
+                     {% endif %}
+                    <tr>
+                        <th>
+                            <div style="margin-bottom: 10px">
+                                Nazwa użytkownika
+                            </div>
+                        </th>
+                        <td>
+                            <div style="margin-bottom: 10px">
+                                {{ form.username }}
+                            </div>
+                        </td>
+                    </tr>
+                     {% if form.email.errors %}
                             <tr>
-                                <th>
-                                    <div style="margin-bottom: 10px">
-                                        Adres email
-                                    </div>
-                                </th>
-                                <td>
-                                    <div style="margin-bottom: 10px">
-                                        {{ form.email }}
-                                    </div>
-                                </td>
+                                <div style="font-size: 15px; color: red; margin-left: 5vh; text-align: left">
+                                    {{ form.email.errors }}
+                                </div>
                             </tr>
+                     {% endif %}
+                    <tr>
+                        <th>
+                            <div style="margin-bottom: 10px">
+                                Adres email
+                            </div>
+                        </th>
+                        <td>
+                            <div style="margin-bottom: 10px">
+                                {{ form.email }}
+                            </div>
+                        </td>
+                    </tr>
+                     {% if form.first_name.errors %}
                             <tr>
-                                <th>
-                                    <div style="margin-bottom: 10px">
-                                        Imię
-                                    </div>
-                                </th>
-                                <td>
-                                    <div style="margin-bottom: 10px">
-                                        {{ form.first_name }}
-                                    </div>
-                                </td>
+                                <div style="font-size: 15px; color: red; margin-left: 5vh; text-align: left">
+                                    {{ form.first_name.errors }}
+                                </div>
                             </tr>
+                     {% endif %}
+                    <tr>
+                        <th>
+                            <div style="margin-bottom: 10px">
+                                Imię
+                            </div>
+                        </th>
+                        <td>
+                            <div style="margin-bottom: 10px">
+                                {{ form.first_name }}
+                            </div>
+                        </td>
+                    </tr>
+                     {% if form.last_name.errors %}
                             <tr>
-                                <th>
-                                    <div style="margin-bottom: 10px">
-                                        Nazwisko
-                                    </div>
-                                </th>
-                                <td>
-                                    <div style="margin-bottom: 10px">
-                                        {{ form.last_name }}
-                                    </div>
-                                </td>
+                                <div style="font-size: 15px; color: red; margin-left: 5vh; text-align: left">
+                                    {{ form.last_name.errors }}
+                                </div>
                             </tr>
+                     {% endif %}
+                    <tr>
+                        <th>
+                            <div style="margin-bottom: 10px">
+                                Nazwisko
+                            </div>
+                        </th>
+                        <td>
+                            <div style="margin-bottom: 10px">
+                                {{ form.last_name }}
+                            </div>
+                        </td>
+                    </tr>
+                     {% if form.password1.errors %}
                             <tr>
-                                <th>
-                                    <div style="margin-bottom: 10px">
-                                        Hasło
-                                    </div>
-                                </th>
-                                <td>
-                                    <div style="margin-bottom: 10px">
-                                        {{ form.password1 }}
-                                    </div>
-                                </td>
+                                <div style="font-size: 15px; color: red; margin-left: 5vh; text-align: left">
+                                    {{ form.password1.errors }}
+                                </div>
                             </tr>
+                     {% endif %}
+                    <tr>
+                        <th>
+                            <div style="margin-bottom: 10px">
+                                Hasło
+                            </div>
+                        </th>
+                        <td>
+                            <div style="margin-bottom: 10px">
+                                {{ form.password1 }}
+                            </div>
+                        </td>
+                    </tr>
+                     {% if form.password2.errors %}
                             <tr>
-                                <th>
-                                    <div style="margin-bottom: 10px">
-                                        Potwierdź hasło
-                                    </div>
-                                </th>
-                                <td>
-                                    <div style="margin-bottom: 10px">
-                                        {{ form.password2 }}
-                                    </div>
-                                </td>
+                                <div style="font-size: 15px; color: red; margin-left: 5vh; text-align: left">
+                                    {{ form.password2.errors }}
+                                </div>
                             </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <div>
-                    <button class="sign_button" type="submit">Zarejestruj się</button>
-                </div>
-                <br>
-            </form>
-            <div>
-                Posiadasz konto w ASVS Tool? <a class="sign_l" href="{% url 'login' %}">Zaloguj się</a>
+                     {% endif %}
+                    <tr>
+                        <th>
+                            <div style="margin-bottom: 10px">
+                                Potwierdź hasło
+                            </div>
+                        </th>
+                        <td>
+                            <div style="margin-bottom: 10px">
+                                {{ form.password2 }}
+                            </div>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
             </div>
-        </div>
-    {% else %}
-        <div class="content_register">
-            <h1>Dołącz do ASVS Tool!</h1>
-            <form method="POST">
-                {% csrf_token %}
-                <div class="form_div">
-                    <table>
-                        <tbody>
-                            <tr>
-                                <th>
-                                    <div style="margin-bottom: 10px">
-                                        Nazwa użytkownika
-                                    </div>
-                                </th>
-                                <td>
-                                    <div style="margin-bottom: 10px">
-                                        {{ form.username }}
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th>
-                                    <div style="margin-bottom: 10px">
-                                        Adres email
-                                    </div>
-                                </th>
-                                <td>
-                                    <div style="margin-bottom: 10px">
-                                        {{ form.email }}
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th>
-                                    <div style="margin-bottom: 10px">
-                                        Imię
-                                    </div>
-                                </th>
-                                <td>
-                                    <div style="margin-bottom: 10px">
-                                        {{ form.first_name }}
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th>
-                                    <div style="margin-bottom: 10px">
-                                        Nazwisko
-                                    </div>
-                                </th>
-                                <td>
-                                    <div style="margin-bottom: 10px">
-                                        {{ form.last_name }}
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th>
-                                    <div style="margin-bottom: 10px">
-                                        Hasło
-                                    </div>
-                                </th>
-                                <td>
-                                    <div style="margin-bottom: 10px">
-                                        {{ form.password1 }}
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th>
-                                    <div style="margin-bottom: 10px">
-                                        Potwierdź hasło
-                                    </div>
-                                </th>
-                                <td>
-                                    <div style="margin-bottom: 10px">
-                                        {{ form.password2 }}
-                                    </div>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <div>
-                    <button class="sign_button" type="submit">Zarejestruj się</button>
-                </div>
-                <br>
-            </form>
             <div>
-                Posiadasz konto w ASVS Tool? <a class="sign_l" href="{% url 'login' %}">Zaloguj się</a>
+                <button class="sign_button" type="submit">Zarejestruj się</button>
             </div>
+            <br>
+        </form>
+        <div>
+            Posiadasz konto w ASVS Tool? <a class="sign_l" href="{% url 'login' %}">Zaloguj się</a>
         </div>
-    {% endif %}
+    </div>
 {% endblock content %}
