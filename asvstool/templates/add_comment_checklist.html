@@ -16,13 +16,28 @@
             </div>
             <div class="content_new_comment">
                 <form method="POST">
+                {% csrf_token %}
                     <table>
-                        {%  csrf_token %}
-                        {{ form.as_table }}
+                        <tbody>
+                             {% if form.comment.errors %}
+                                 <div class="error">
+                                     {{ form.comment.errors }}
+                                 </div>
+                             {% endif %}
+                            <tr>
+                                <th>
+                                    <div class="td_add">
+                                        <button class="add_button" type="submit">Dodaj komentarz</button>
+                                    </div>
+                                </th>
+                                <td>
+                                    <div style="margin-bottom: 10px">
+                                        {{ form.comment }}
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
                     </table>
-                    <div class="td_add">
-                        <button class="add_button" type="submit">Dodaj komentarz</button>
-                    </div>
                 </form>
             </div>
             <div class="back">
@@ -37,13 +52,28 @@
             </div>
             <div class="content_new_comment">
                 <form method="POST">
+                {% csrf_token %}
                     <table>
-                        {%  csrf_token %}
-                        {{ form.as_table }}
+                        <tbody>
+                             {% if form.comment.errors %}
+                                 <div class="error">
+                                     {{ form.comment.errors }}
+                                 </div>
+                             {% endif %}
+                            <tr>
+                                <th>
+                                    <div class="td_add">
+                                        <button class="add_button" type="submit">Dodaj komentarz</button>
+                                    </div>
+                                </th>
+                                <td>
+                                    <div style="margin-bottom: 10px">
+                                        {{ form.comment }}
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
                     </table>
-                    <div class="td_add">
-                        <button class="add_button" type="submit">Dodaj komentarz</button>
-                    </div>
                 </form>
             </div>
             <div class="back">

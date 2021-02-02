@@ -43,11 +43,11 @@
         cursor: pointer;
         background-color: #42455a;
         color: #b2b1b1;
-        margin: 1% 0;
     }
 
     .special{
-        width: 367%;
+        width: 104.5vh;
+        margin-top: 1%;
         height: 5vh;
         font-size: 20px;
         background-color: white;
@@ -77,7 +77,6 @@
     }
 
     .td_add{
-        margin-top: 1vh;
         width: 13.5%;
     }
 
@@ -85,5 +84,11 @@
         text-decoration: none;
         color: white;
         font-size: 20px;
+    }
+
+    .error{
+        font-size: 15px;
+        color: red; margin-left: 5vh;
+        text-align: left
     }
 
