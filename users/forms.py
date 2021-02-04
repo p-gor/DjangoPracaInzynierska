@@ -1,9 +1,7 @@
 from django import forms
-from django.forms import Textarea
-from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from .models import Profile, Account
-from django.utils.translation import gettext, gettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 
 
 class UserRegisterForm(UserCreationForm):
@@ -76,6 +74,8 @@ class UserUpdateForm(forms.ModelForm):
 
 
 class ProfileUpdateForm(forms.ModelForm):
+    image = forms.ImageField(label='Select Profile Image', required=False, widget=forms.FileInput)
+
     class Meta:
         model = Profile
         fields = ['image']

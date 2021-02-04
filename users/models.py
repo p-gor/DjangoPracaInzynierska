@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
+from django.core.exceptions import ValidationError
 
 
 # Create your models here.
@@ -80,9 +81,17 @@ class Account(AbstractBaseUser):
         return True
 
 
+def validate_image(image):
+    file_size = image.file.size
+
+    limit_mb = 8
+    if file_size > limit_mb * 1024 * 1024:
+        raise ValidationError("Maksymalna wielkość pliku to %s MB" % limit_mb)
+
+
 class Profile(models.Model):
     user = models.OneToOneField(Account, on_delete=models.CASCADE)
-    image = models.ImageField(default='default.jpg', upload_to='profiles_picture_folder')
+    image = models.ImageField(default='default.jpg', upload_to='profiles_picture_folder', validators=[validate_image])
 
     def __str__(self):
         return f'{self.user.username} Profile'

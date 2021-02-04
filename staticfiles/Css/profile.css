@@ -91,3 +91,12 @@
         border: solid white;
         border-radius: 60px;
     }
+    .error{
+        font-size: 15px;
+        color: red;
+        text-align: center;
+    }
+
+    .errorlist {
+        list-style: none;
+    }
