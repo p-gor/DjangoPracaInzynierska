@@ -56,6 +56,11 @@
 
 .error{
     font-size: 15px;
-    color: red; margin-left: 5vh;
-    text-align: left
+    color: red;
+    text-align: center;
 }
+
+.errorlist {
+    list-style: none;
+}
+

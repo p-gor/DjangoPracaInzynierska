@@ -44,8 +44,8 @@ class AccountManager(BaseUserManager):
 
 
 class Account(AbstractBaseUser):
-    email = models.EmailField(verbose_name="email", max_length=60, unique=True)
-    username = models.CharField(max_length=40, unique=True)
+    email = models.EmailField(verbose_name="adres e-mail", max_length=60, unique=True)
+    username = models.CharField(verbose_name="nazwa użytkownika", max_length=40, unique=True)
     date_joined = models.DateTimeField(verbose_name="date joined", auto_now_add=True)
     last_login = models.DateTimeField(verbose_name="last login", auto_now=True)
     is_admin = models.BooleanField(default=False)
@@ -53,8 +53,8 @@ class Account(AbstractBaseUser):
     is_staff = models.BooleanField(default=False)
     is_superuser = models.BooleanField(default=False)
 
-    first_name = models.CharField(max_length=30)
-    last_name = models.CharField(max_length=30)
+    first_name = models.CharField(verbose_name="imię", max_length=30)
+    last_name = models.CharField(verbose_name="nazwisko", max_length=30)
     type_account = models.BooleanField(default=True, blank=True)
     # 0 - klient
     # 1 - Pentester

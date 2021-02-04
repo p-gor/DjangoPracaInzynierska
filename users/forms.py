@@ -3,22 +3,27 @@ from django.forms import Textarea
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.forms import AuthenticationForm
 from .models import Profile, Account
+from django.utils.translation import gettext, gettext_lazy as _
 
 
 class UserRegisterForm(UserCreationForm):
     username = forms.CharField(max_length=40, required=True,
                                widget=forms.TextInput(attrs={'class': 'pr', 'title': 'Nazwa użytkownika'}))
     email = forms.EmailField(max_length=60, required=True,
-                             widget=forms.TextInput(attrs={'class': 'pr', 'title': 'Email'}))
+                             widget=forms.TextInput(attrs={'class': 'pr', 'title': 'Email'})
+                             )
     first_name = forms.CharField(max_length=30, required=True,
                                  widget=forms.TextInput(attrs={'class': 'pr', 'title': 'Imię'}))
     last_name = forms.CharField(max_length=30, required=True,
                                 widget=forms.TextInput(attrs={'class': 'pr', 'title': 'Nazwisko'}))
     password1 = forms.CharField(required=True, widget=forms.PasswordInput(
-        attrs={'class': 'pr', 'title': 'Hasło powinno: zawierać minimum 8 znaków, nie może składać się z samych cyfr,'
-                                       'nie może być powszechnie znane, nie może zawierać informacji personalnych'}))
+        attrs={'class': 'pr', 'title': 'Hasło'}))
     password2 = forms.CharField(required=True, widget=forms.PasswordInput(
         attrs={'class': 'pr', 'title': 'Potwierdź hasło'}))
+
+    error_messages = {
+        'password_mismatch': _('Podane hasła nie pasują do siebie.'),
+    }
 
     class Meta:
         model = Account
@@ -45,6 +50,14 @@ class UserLoginForm(AuthenticationForm):
         attrs={'class': 'pr', 'title': 'Login'}))
     password = forms.CharField(widget=forms.PasswordInput(
         attrs={'class': 'pr', 'title': 'Hasło'}))
+
+    error_messages = {
+        'invalid_login': _(
+            "Proszę wpisać poprawny adres e-mail i hasło."
+            "Należy pamiętać, że wielkość liter ma znaczenie."
+        ),
+        'inactive': _("To konto jest nieaktywne."),
+    }
 
 
 class UserUpdateForm(forms.ModelForm):
