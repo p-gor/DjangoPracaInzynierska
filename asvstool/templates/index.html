@@ -13,24 +13,41 @@
     {% endif %}
 </head>
 <body>
-    <div class="container">
-        <div class="menu">
-            <ul>
-                <li><a class="nav" href="{% url 'tool-home' %}">Home</a></li>
-                <li><a class="nav" href="{% url 'tool-project' %}">Moje Projekty</a></li>
+    <div class="background">
+        <nav>
+            <div class="logo">
+                <h4>ASVS-Tool</h4>
+            </div>
+            <ul class="nav-links">
+                <li><a href="{% url 'tool-home' %}">Home</a></li>
+                <li><a href="{% url 'tool-project' %}">Moje Projekty</a></li>
                 {% if user.type_account == 0 %}
-                    <li><a class="nav" href="{% url 'tool-add_project' %}">Nowy Projekt</a></li>
+                    <li><a href="{% url 'tool-add_project' %}">Nowy Projekt</a></li>
                 {% endif %}
-                <li><a class="nav" href="{% url 'tool-about' %}">O ASVS</a></li>
-                {% if user.is_authenticated %}
-                    <li><a class="log" href="{% url 'logout' %}">Wyloguj</a></li>
-                    <li><a class="reg" href="{% url 'tool-profile' %}">Profil</a></li>
-                {% else %}
-                    <li><a class="log" href="{% url 'login' %}">Zaloguj</a></li>
-                    <li><a class="reg" href="{% url 'register' %}">Rejestracja</a></li>
-                {% endif %}
+                <li><a href="{% url 'tool-about' %}">O ASVS</a></li>
+{#                {% if user.is_authenticated %}#}
+{#                    <li><a style="color: white" href="{% url 'tool-profile' %}">Profil</a></li>#}
+{#                    <li><a style="color: white" href="{% url 'logout' %}">Wyloguj</a></li>#}
+{#                {% else %}#}
+{#                    <li><a style="color: white" href="{% url 'register' %}">Rejestracja</a></li>#}
+{#                    <li><a style="color: white" href="{% url 'login' %}">Zaloguj</a></li>#}
+{#                {% endif %}#}
             </ul>
-        </div>
+            <div class="log-reg">
+                {% if user.is_authenticated %}
+                    <li><a style="color: white" href="{% url 'tool-profile' %}">Profil</a></li>
+                    <li><a style="color: white" href="{% url 'logout' %}">Wyloguj</a></li>
+                {% else %}
+                    <li><a style="color: white" href="{% url 'register' %}">Rejestracja</a></li>
+                    <li><a style="color: white" href="{% url 'login' %}">Zaloguj</a></li>
+                {% endif %}
+            </div>
+            <div class="paski">
+                <div class="line1"></div>
+                <div class="line2"></div>
+                <div class="line3"></div>
+            </div>
+        </nav>
         {% block content %}{% endblock %}
     </div>
 </body>

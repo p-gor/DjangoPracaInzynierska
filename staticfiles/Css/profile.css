@@ -1,12 +1,10 @@
     .content{
-        width: 90%;
-        height: 80%;
         margin: 5vh auto 0 5vh;
     }
 
     .content_profile{
         width: 60vh;
-        height: 10vh;
+        height: 13vh;
         box-shadow: 0 0 3px 0 rgba(0,0,0,0);
         padding: 2vh;
         margin: 7vh auto 0 auto;
@@ -32,18 +30,20 @@
 
     .image_container{
         float: left;
-        background: white;
+        background: #42455a;
+        color: #42455a;
+        width: 10vh;
+        height: 10vh;
+        position: relative; top: -7px;
+        border-radius: 60px;
+    }
+
+    .image_container img{
+        background: #42455a;
         width: 10vh;
         height: 10vh;
         border-radius: 60px;
         border: solid white;
-    }
-
-    .image_container img{
-        background: white;
-        width: 10vh;
-        height: 10vh;
-        border-radius: 60px;
     }
 
     .content_update{

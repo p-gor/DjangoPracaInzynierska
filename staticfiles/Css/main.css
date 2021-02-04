@@ -1,51 +1,70 @@
-  *{
+    *{
         margin: 0;
         padding: 0;
+        box-sizing: border-box;
         font-family: sans-serif;
     }
 
-    .container{
+    nav{
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        min-height: 10vh;
+        background-color: #42455a;
+    }
+
+    .logo{
+        color: white;
+        letter-spacing: 3px;
+        font-size: 25px;
+        font-weight: bold;
+
+    }
+
+    .nav-links{
+        display: flex;
+        justify-content: space-around;
+        width: 50%;
+    }
+
+    .nav-links a{
+        color: #b2b1b1;
+        text-decoration: none;
+        letter-spacing: 3px;
+        font-weight: bold;
+        font-size: 20px;
+    }
+
+    .nav-links li{
+        list-style: none;
+    }
+
+    .log-reg{
+        position: relative; left: 130px;
+        display: flex;
+        justify-content: space-around;
+        width: 20%;
+    }
+
+    .log-reg a{
+        color: white;
+        text-decoration: none;
+        letter-spacing: 3px;
+        font-weight: bold;
+        font-size: 20px;
+    }
+
+    .log-reg li{
+        list-style: none;
+    }
+
+
+    .background{
         width: 100%;
         height: 100%;
         background-image: url("../Image/bg.jpg");
         background-position: center;
         background-size: cover;
         position: absolute;
-    }
-
-    .menu ul{
-        display: inline-flex;
-        width: 100%;
-        height: 10vh;
-        background: #42455a;
-    }
-
-    .menu ul li{
-        list-style: none;
-        margin: auto 7vh;
-        color: #b2b1b1;
-        cursor: pointer;
-        font-size: larger;
-    }
-
-    .log{
-        top: 3.5%;
-        right: 5vh;
-        position: absolute;
-        text-decoration: none;
-        color: white;
-    }
-
-    .reg{
-        top: 3.5%;
-        right: 15vh;
-        position: absolute;
-        text-decoration: none;
-        color: white;
-    }
-
-    .nav{
-        text-decoration: none;
-        color: #b2b1b1;
     }
 

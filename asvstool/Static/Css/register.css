@@ -52,6 +52,7 @@
     color: white;
     border: solid white;
     border-radius: 60px;
+    width: 20vh;
 }
 
 .error{
