@@ -4,7 +4,7 @@
 }
 
 .content_register{
-    width: 55vh;
+    width: 60vh;
     box-shadow: 0 0 3px 0 rgba(0,0,0,0);
     padding: 2vh;
     margin: 7vh auto 0 auto;
@@ -58,7 +58,8 @@
 .error{
     font-size: 15px;
     color: red;
-    text-align: center;
+    text-align: left;
+    position: relative; left: 20px;
 }
 
 .errorlist {
